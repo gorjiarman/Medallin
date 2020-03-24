@@ -3,28 +3,38 @@ from django.contrib import admin
 from predicting import models
 
 
-class InlineTranslationAdmin(admin.TabularInline):
-    model = models.Translation
+class InlineDiseaseSymptom(admin.TabularInline):
+    model = models.DiseaseSymptom
+
+
+class InlineDiseaseCondition(admin.StackedInline):
+    model = models.DiseaseCondition
     extra = 1
 
 
-class ConceptAdmin(admin.ModelAdmin):
-    list_display = ('id', 'type', 'translation')
-    list_filter = ('type', )
-    inlines = (InlineTranslationAdmin, )
+class InlineDiseaseName(admin.StackedInline):
+    model = models.DiseaseName
+    extra = 1
 
 
-class DiseaseFrequencyAdmin(admin.ModelAdmin):
-    list_display = ('concept', 'frequency')
-    list_editable = ('frequency', )
+class InlineSymptomName(admin.StackedInline):
+    model = models.SymptomName
+    extra = 1
+
+
+class DiseaseAdmin(admin.ModelAdmin):
+    inlines = (InlineDiseaseName, InlineDiseaseSymptom, InlineDiseaseCondition)
+
+
+class SymptomAdmin(admin.ModelAdmin):
+    list_display = ('concept', 'persian_name')
+    inlines = (InlineSymptomName, )
 
 
 class ConditionAdmin(admin.ModelAdmin):
-    list_display = ('concept', 'condition', 'factor')
-    list_editable = ('factor', )
-    search_fields = ('concept__id', )
+    list_display = ('label', 'expression')
 
 
-admin.site.register(models.Concept, ConceptAdmin)
-admin.site.register(models.DiseaseFrequency, DiseaseFrequencyAdmin)
+admin.site.register(models.Disease, DiseaseAdmin)
+admin.site.register(models.Symptom, SymptomAdmin)
 admin.site.register(models.Condition, ConditionAdmin)
