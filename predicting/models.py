@@ -77,7 +77,7 @@ class DiseaseCondition(models.Model):
 
 
 class Name(models.Model):
-    locales = {'en-us': 'English (United States)', 'fa-ir': 'فارسی (ایران)'}
+    locales = {'en': 'English (United States)', 'fa': 'فارسی (ایران)'}
     locale = models.CharField(max_length=5, choices=tuple(locales.items()), verbose_name='زبان')
     string = models.CharField(max_length=256, verbose_name='رشته')
 

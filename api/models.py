@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.contrib.postgres.fields.jsonb import JSONField
 
 
 class Token(models.Model):
@@ -19,3 +20,7 @@ class Token(models.Model):
 
     def __str__(self):
         return self.label or 'توکن' + f' {self.id}'
+
+
+class Prediction(models.Model):
+    result = JSONField(null=True)
