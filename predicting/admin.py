@@ -24,6 +24,7 @@ class InlineSymptomName(admin.StackedInline):
 
 class DiseaseAdmin(admin.ModelAdmin):
     inlines = (InlineDiseaseName, InlineDiseaseSymptom, InlineDiseaseCondition)
+    list_display = ('concept', 'persian_name', 'related_symptoms_', 'related_conditions_count')
 
 
 class SymptomAdmin(admin.ModelAdmin):

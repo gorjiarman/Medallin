@@ -1,5 +1,5 @@
 from django.db import models
-from django.conf import settings
+from django.utils.safestring import mark_safe
 
 
 class Concept(models.Model):
@@ -17,7 +17,15 @@ class Disease(Concept):
     def persian_name(self):
         return DiseaseName.objects.get(disease=self, locale='fa-ir').string if DiseaseName.objects.filter(disease=self, locale='fa-ir').exists() else None
 
+    def related_symptoms_(self):
+        return mark_safe('<br>'.join(str(item) for item in self.diseasesymptom.symptoms.all()))
+
+    def related_conditions_count(self):
+        return self.diseasecondition_set.count()
+
     persian_name.short_description = 'نام فارسی'
+    related_symptoms_.short_description = 'علائم مرتبط'
+    related_conditions_count.short_description = 'تعداد شرایط تعریف‌شده'
 
     def __str__(self):
         return f'{self.concept} ({self.persian_name()})' if self.persian_name() else self.concept
