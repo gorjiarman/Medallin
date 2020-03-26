@@ -1,7 +1,7 @@
 import json
 
 from django.http import HttpResponseBadRequest, JsonResponse
-from django.shortcuts import get_object_or_404
+from django_q.tasks import result as async_result, async_task
 
 from api import models, utils
 from predicting import models as prediction
@@ -23,13 +23,11 @@ def list_diseases(request):
 def predict(request):
     if request.GET:
         if request.GET.get('id'):
-            prediction_id = request.GET['id']
-            prediction = get_object_or_404(models.Prediction, id=int(prediction_id))
-            prediction_result = prediction.result
-            return JsonResponse({'status': prediction_result is not None, 'result': prediction_result})
+            result = async_result(task_id=request.GET.get('id'))
+            return JsonResponse({'status': 'completed' if result is not None else 'pending', 'result': result})
     if request.POST:
         symptoms, profile = request.POST.get('symptoms'), request.POST.get('profile')
         symptoms, profile = json.loads(symptoms), json.loads(profile)
-        # TODO: Enqueue the prediction.
-        return JsonResponse({'id': None})
+        tracking_id = async_task('api.services.make_prediction', symptoms, profile)
+        return JsonResponse({'id': tracking_id})
     return HttpResponseBadRequest('Invalid request.')

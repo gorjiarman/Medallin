@@ -20,7 +20,3 @@ class Token(models.Model):
 
     def __str__(self):
         return self.label or 'توکن' + f' {self.id}'
-
-
-class Prediction(models.Model):
-    result = JSONField(null=True)
