@@ -1,10 +1,15 @@
 import json
 
 from django.http import HttpResponseBadRequest, JsonResponse
+from django.shortcuts import render
 from django_q.tasks import result as async_result, async_task
 
-from api import models, utils
+from api import utils
 from predicting import models as prediction
+
+
+def documentations(request):
+    return render(request, 'api-docs.html')
 
 
 @utils.requires_token
