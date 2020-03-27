@@ -1,460 +1,335 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-		<!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>API Docs | Medallin</title>
-<meta name="generator" content="Jekyll v3.7.2" />
-<meta property="og:title" content="API Docs" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Documentation for Medallin’s Prediction Engine." />
-<meta property="og:description" content="Documentation for Medallin’s Prediction Engine." />
-<meta property="og:site_name" content="Medallin" />
-<!-- End Jekyll SEO tag -->
-
-
-		<link rel="stylesheet" href="/static/css/style.css">
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="/static/js/main.js"></script>
-	</head>
-	<body>
-		<header>
-			<form action="/search/" method="get">
-				<input type="text" name="q" id="search-input" placeholder="Search">
-				<input type="submit" value="Search" style="display: none;">
-			</form>
-
-			<div id="sidebar" class="sidebar">
-	
-	
-		
-	
-		
-			<section>
-				<h6>Documentation</h6>
-				<ul>
-					
-					
-						<li>
-							<a href="#documentationgetting_started">
-								Medallin Prediction API
-								
-							</a>
-						</li>
-					
-						<li>
-							<a href="#documentationauthentication">
-								Authentication
-								
-							</a>
-						</li>
-					
-						<li>
-							<a href="#documentationerrors">
-								Request Statuses
-								
-							</a>
-						</li>
-					
-				</ul>
-			</section>
-		
-	
-		
-			<section>
-				<h6>APIs</h6>
-				<ul>
-					
-					
-						<li>
-							<a href="#apidiseases_list">
-								/list/diseases
-								<span class="endpoint get"></span>
-							</a>
-						</li>
-					
-						<li>
-							<a href="#apisymptoms_list">
-								/list/symptoms
-								<span class="endpoint get"></span>
-							</a>
-						</li>
-					
-						<li>
-							<a href="#apimake_prediction">
-								/predict
-								<span class="endpoint post"></span>
-							</a>
-						</li>
-					
-						<li>
-							<a href="#apiget_prediction_result">
-								/predict
-								<span class="endpoint get"></span>
-							</a>
-						</li>
-					
-				</ul>
-			</section>
-		
-	
-</div>
-
-
-			<p class="copyright" style="display: none">
-				<a href="https://cloudcannon.com/">
-					Template by CloudCannon
-				</a>
-			</p>
-		</header>
-		<div class="main">
-			
-
-	
-	
-
-	
-	
-		<section class="doc-content">
-			<section class="left-docs">
-				<h3>
-					<a id="documentationgetting_started">
-						Medallin Prediction API
-						
-					</a>
-					<a class="editor-link" href="cloudcannon:collections/_documentation/getting_started.md">Edit</a>
-				</h3>
-				
-
-				
-
-				<p>This documentation will walk you through the API for Medallin’s Prediction Engine.</p>
-
-
-				
-			</section>
-			
-		</section>
-	
-		<section class="doc-content">
-			<section class="left-docs">
-				<h3>
-					<a id="documentationauthentication">
-						Authentication
-						
-					</a>
-					<a class="editor-link" href="cloudcannon:collections/_documentation/authentication.md">Edit</a>
-				</h3>
-				
-
-				
-
-				<p>You need to be authenticated for all API requests. Your requests need to be <em>bearing</em> a valid token for using our 
-services. Contact us at <code class="highlighter-rouge">gorjiarman@gmail.com</code> to acquire an API token.</p>
-
-
-				
-			</section>
-			
-					<section class="right-code">
-						
-								
-
-
-<div title="Curl" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> curl ENDPOINT <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_API_TOKEN"</span> 
-</code></pre></div></div>
-
-						
-								
-
-
-<div title="Python" class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ENDPOINT</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer YOUR_API_TOKEN"</span><span class="p">})</span>
-</code></pre></div></div>
-
-						
-								
-
-
-<div title="JavaScript" class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">Axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">ENDPOINT</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{</span> <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer YOUR_API_TOKEN'</span> <span class="p">}</span> <span class="p">}</span> <span class="p">)</span>
-</code></pre></div></div>
-
-						
-				</section>
-			
-		</section>
-	
-		<section class="doc-content">
-			<section class="left-docs">
-				<h3>
-					<a id="documentationerrors">
-						Request Statuses
-						
-					</a>
-					<a class="editor-link" href="cloudcannon:collections/_documentation/errors.md">Edit</a>
-				</h3>
-				
-
-				
-
-				<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200</td>
-      <td>OK</td>
-      <td>Successful.</td>
-    </tr>
-    <tr>
-      <td>400</td>
-      <td>Bad Request</td>
-      <td>Invalid request parameters / missing API token.</td>
-    </tr>
-    <tr>
-      <td>401</td>
-      <td>Unauthorized</td>
-      <td>Invalid or expired API token.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>All successful requests will receive a JSON object as response.</p>
-
-
-				
-			</section>
-			
-		</section>
-	
-
-	
-	
-		<section class="doc-content">
-			<section class="left-docs">
-				<h3>
-					<a id="apidiseases_list">
-						/list/diseases
-						
-							<span class="endpoint get"></span>
-						
-					</a>
-					<a class="editor-link" href="cloudcannon:collections/_api/diseases_list.md">Edit</a>
-				</h3>
-				
-					<p class="description">Lists all the diseases available in the system.</p>
-				
-
-				
-
-				
-
-
-				
-						
-								
-
-
-<div title="Response" class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"C0009443"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Common Cold"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"C0011847"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Diabetes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"C0004096"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Asthma"</span><span class="p">,</span><span class="w">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Begin Jekyll SEO tag v2.4.0 -->
+    <title>API Docs | Medallin</title>
+    <meta name="generator" content="Jekyll v3.7.2"/>
+    <meta property="og:title" content="API Docs"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta name="description" content="Documentation for Medallin’s Prediction Engine."/>
+    <meta property="og:description" content="Documentation for Medallin’s Prediction Engine."/>
+    <meta property="og:site_name" content="Medallin"/>
+    <!-- End Jekyll SEO tag -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+<header>
+    <div id="sidebar" class="sidebar">
+        <section>
+            <h6>Documentation</h6>
+            <ul>
+                <li>
+                    <a href="#documentationgetting_started">
+                        Medallin Prediction API
+                    </a>
+                </li>
+                <li>
+                    <a href="#documentationauthentication">
+                        Authentication
+                    </a>
+                </li>
+                <li>
+                    <a href="#documentationerrors">
+                        Request Statuses
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h6>APIs</h6>
+            <ul>
+                <li>
+                    <a href="#apidiseases_list">
+                        /list/diseases
+                        <span class="endpoint get"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#apisymptoms_list">
+                        /list/symptoms
+                        <span class="endpoint get"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#apimake_prediction">
+                        /predict
+                        <span class="endpoint post"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#apiget_prediction_result">
+                        /predict
+                        <span class="endpoint get"></span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </div>
+    <p class="copyright" style="display: none">
+        <a href="https://cloudcannon.com/">
+            Template by CloudCannon
+        </a>
+    </p>
+</header>
+<div class="main">
+    <section class="doc-content">
+        <section class="left-docs">
+            <h3>
+                <a id="documentationgetting_started">
+                    Medallin Prediction API
+                </a>
+                <a class="editor-link" href="cloudcannon:collections/_documentation/getting_started.md">Edit</a>
+            </h3>
+            <p>This documentation will walk you through the API for Medallin’s Prediction Engine.</p>
+        </section>
+    </section>
+    <section class="doc-content">
+        <section class="left-docs">
+            <h3>
+                <a id="documentationauthentication">
+                    Authentication
+                </a>
+                <a class="editor-link" href="cloudcannon:collections/_documentation/authentication.md">Edit</a>
+            </h3>
+            <p>You need to be authenticated for all API requests. Your requests need to be <em>bearing</em> a valid
+                token for using our
+                services. Contact us at <code class="highlighter-rouge">gorjiarman@gmail.com</code> to acquire an API
+                token.</p>
+        </section>
+        <section class="right-code">
+            <div title="Curl" class="language-bash highlighter-rouge">
+                <div class="highlight">
+                    <pre class="highlight">
+                        <code> curl ENDPOINT <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_API_TOKEN"</span></code>
+                    </pre>
+                </div>
+            </div>
+            <div title="Python" class="language-python highlighter-rouge">
+                <div class="highlight">
+                    <pre class="highlight"><code> <span class="n">requests</span><span
+                        class="o">.</span><span class="n">get</span><span class="p">(</span><span
+                        class="n">ENDPOINT</span><span class="p">,</span> <span class="n">data</span><span
+                        class="p">,</span> <span class="n">headers</span><span class="o">=</span><span
+                        class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span
+                        class="s">"Bearer YOUR_API_TOKEN"</span><span class="p">})</span>
+                    </code></pre>
+                </div>
+            </div>
+            <div title="JavaScript" class="language-javascript highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code> <span class="nx">Axios</span><span
+                        class="p">.</span><span class="kd">get</span><span class="p">(</span><span
+                        class="nx">ENDPOINT</span><span class="p">,</span> <span class="nx">data</span><span
+                        class="p">,</span> <span class="p">{</span> <span class="na">headers</span><span
+                        class="p">:</span> <span class="p">{</span> <span class="na">Authorization</span><span
+                        class="p">:</span> <span class="s1">'Bearer YOUR_API_TOKEN'</span> <span
+                        class="p">}</span> <span class="p">}</span> <span class="p">)</span>
+                </code></pre>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="doc-content">
+        <section class="left-docs">
+            <h3>
+                <a id="documentationerrors">
+                    Request Statuses
+                </a>
+                <a class="editor-link" href="cloudcannon:collections/_documentation/errors.md">Edit</a>
+            </h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>OK</td>
+                    <td>Successful.</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>Bad Request</td>
+                    <td>Invalid request parameters / missing API token.</td>
+                </tr>
+                <tr>
+                    <td>401</td>
+                    <td>Unauthorized</td>
+                    <td>Invalid or expired API token.</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>All successful requests will receive a JSON object as response.</p>
+        </section>
+    </section>
+    <section class="doc-content">
+        <section class="left-docs">
+            <h3>
+                <a id="apidiseases_list">
+                    /list/diseases
+                    <span class="endpoint get"></span>
+                </a>
+                <a class="editor-link" href="cloudcannon:collections/_api/diseases_list.md">Edit</a>
+            </h3>
+            <p class="description">Lists all the diseases available in the system.</p>
+            <div title="Response" class="language-json highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"C0009443"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Common Cold"</span><span
+                        class="p">,</span><span class="w">
+  </span><span class="s2">"C0011847"</span><span class="p">:</span><span class="w"> </span><span
+                        class="s2">"Diabetes"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"C0004096"</span><span class="p">:</span><span class="w"> </span><span
+                        class="s2">"Asthma"</span><span class="p">,</span><span class="w">
   </span><span class="err">...</span><span class="w">              
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-								
-						
-			</section>
-			
-		</section>
-	
-		<section class="doc-content">
-			<section class="left-docs">
-				<h3>
-					<a id="apisymptoms_list">
-						/list/symptoms
-						
-							<span class="endpoint get"></span>
-						
-					</a>
-					<a class="editor-link" href="cloudcannon:collections/_api/symptoms_list.md">Edit</a>
-				</h3>
-				
-					<p class="description">Lists all the symptoms available in the system.</p>
-				
-
-				
-						<h6>Parameters</h6>
-						<dl>
-								
-										<dt>Accept-Language</dt>
-										<dd>(HTTP Header) Preferred language for the names of the symptoms.</dd>
-								
-						</dl>
-				
-
-				
-
-
-				
-						
-								
-
-
-<div title="Response" class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"C0015967"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fever"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"C0010200"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cough"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"C1260880"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rhinorrhea"</span><span class="p">,</span><span class="w">
+</span></code></pre>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="doc-content">
+        <section class="left-docs">
+            <h3>
+                <a id="apisymptoms_list">
+                    /list/symptoms
+                    <span class="endpoint get"></span>
+                </a>
+                <a class="editor-link" href="cloudcannon:collections/_api/symptoms_list.md">Edit</a>
+            </h3>
+            <p class="description">Lists all the symptoms available in the system.</p>
+            <h6>Parameters</h6>
+            <dl>
+                <dt>Accept-Language</dt>
+                <dd>(HTTP Header) Preferred language for the names of the symptoms.</dd>
+            </dl>
+            <div title="Response" class="language-json highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"C0015967"</span><span class="p">:</span><span class="w"> </span><span
+                        class="s2">"Fever"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"C0010200"</span><span class="p">:</span><span class="w"> </span><span
+                        class="s2">"Cough"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"C1260880"</span><span class="p">:</span><span class="w"> </span><span
+                        class="s2">"Rhinorrhea"</span><span class="p">,</span><span class="w">
   </span><span class="err">...</span><span class="w">              
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
+</span></code></pre>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="doc-content">
+        <section class="left-docs">
+            <h3>
+                <a id="apimake_prediction">
+                    /predict
+                    <span class="endpoint post"></span>
+                </a>
+                <a class="editor-link" href="cloudcannon:collections/_api/make_prediction.md">Edit</a>
+            </h3>
+            <p class="description">Makes a prediction and suggests other symptoms for furthering the examination.</p>
+            <h6>Parameters</h6>
+            <dl>
 
-								
-						
-			</section>
-			
-		</section>
-	
-		<section class="doc-content">
-			<section class="left-docs">
-				<h3>
-					<a id="apimake_prediction">
-						/predict
-						
-							<span class="endpoint post"></span>
-						
-					</a>
-					<a class="editor-link" href="cloudcannon:collections/_api/make_prediction.md">Edit</a>
-				</h3>
-				
-					<p class="description">Makes a prediction and suggests other symptoms for furthering the examination.</p>
-				
+                <dt>symptoms</dt>
+                <dd>Object mapping symptom IDs to a value in the range [-1, 1].</dd>
 
-				
-						<h6>Parameters</h6>
-						<dl>
-								
-										<dt>symptoms</dt>
-										<dd>Object mapping symptom IDs to a value in the range [-1, 1].</dd>
-								
-										<dt>profile</dt>
-										<dd>Object containing information about the patient.</dd>
-								
-						</dl>
-				
+                <dt>profile</dt>
+                <dd>Object containing information about the patient.</dd>
 
-				<p>Making a call to this endpoint will not result in an immediate response. Instead, you will receive an <strong>id</strong> which you
-can use to retrieve the results using the endpoint below.</p>
-
-
-				
-						
-								
-
-
-<div title="Request" class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"C0015967"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"C0010200"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+            </dl>
+            <p>Making a call to this endpoint will not result in an immediate response. Instead, you will receive an
+                <strong>id</strong> which you
+                can use to retrieve the results using the endpoint below.</p>
+            <div title="Request" class="language-json highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span
+                        class="w">
+      </span><span class="s2">"C0015967"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span
+                        class="p">,</span><span class="w">
+      </span><span class="s2">"C0010200"</span><span class="p">:</span><span class="w"> </span><span
+                        class="mi">-1</span><span class="p">,</span><span class="w">
       </span><span class="err">...</span><span class="w">     
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span
+                        class="w">
+      </span><span class="s2">"age"</span><span class="p">:</span><span class="w"> </span><span
+                        class="mi">26</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span
+                        class="s2">"male"</span><span class="p">,</span><span class="w">
       </span><span class="err">...</span><span class="w">        
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-								
-								
-
-
-<div title="Response" class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prediction_id"</span><span class="w">
+</span></code></pre>
+                </div>
+            </div>
+            <div title="Response" class="language-json highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span
+                        class="s2">"prediction_id"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-								
-						
-			</section>
-			
-		</section>
-	
-		<section class="doc-content">
-			<section class="left-docs">
-				<h3>
-					<a id="apiget_prediction_result">
-						/predict
-						
-							<span class="endpoint get"></span>
-						
-					</a>
-					<a class="editor-link" href="cloudcannon:collections/_api/get_prediction_result.md">Edit</a>
-				</h3>
-				
-					<p class="description">Retrieves the result of a prediction request.</p>
-				
-
-				
-						<h6>Parameters</h6>
-						<dl>
-								
-										<dt>id</dt>
-										<dd>Valid prediction ID.</dd>
-								
-						</dl>
-				
-
-				<p>For more information on the parameter <strong>profile</strong>, check out the example request below. Lists found in the result are
-ordered.</p>
-
-
-				
-						
-								
-
-
-<div title="Response to a Pending Request" class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></code></pre>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="doc-content">
+        <section class="left-docs">
+            <h3>
+                <a id="apiget_prediction_result">
+                    /predict
+                    <span class="endpoint get"></span>
+                </a>
+                <a class="editor-link" href="cloudcannon:collections/_api/get_prediction_result.md">Edit</a>
+            </h3>
+            <p class="description">Retrieves the result of a prediction request.</p>
+            <h6>Parameters</h6>
+            <dl>
+                <dt>id</dt>
+                <dd>Valid prediction ID.</dd>
+            </dl>
+            <p>For more information on the parameter <strong>profile</strong>, check out the example request below.
+                Lists found in the result are
+                ordered.</p>
+            <div title="Response to a Pending Request" class="language-json highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span
+                        class="s2">"pending"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span
+                        class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-								
-								
-
-
-<div title="Response to a Completed Request" class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"predictions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
-    </span><span class="s2">"suggestions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+</span></code></pre>
+                </div>
+            </div>
+            <div title="Response to a Completed Request" class="language-json highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span
+                        class="s2">"completed"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span
+                        class="w">
+    </span><span class="s2">"predictions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span
+                        class="err">...</span><span class="p">]</span><span class="w">
+    </span><span class="s2">"suggestions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span
+                        class="err">...</span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-								
-						
-			</section>
-			
-		</section>
-	
-
-
-		</div>
-		<script>
-			document.getElementById("open-nav").addEventListener("click", function () {
-				document.body.classList.toggle("nav-open");
-			});
-		</script>
-	</body>
+</span></code></pre>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>
+<script>
+    document.getElementById("open-nav").addEventListener("click", function () {
+        document.body.classList.toggle("nav-open");
+    });
+</script>
+</body>
 </html>
