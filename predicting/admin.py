@@ -1,41 +1,83 @@
 from django.contrib import admin
+from django.conf import settings
 
 from predicting import models
 
 
-class InlineDiseaseSymptom(admin.TabularInline):
-    model = models.DiseaseSymptom
-
-
-class InlineDiseaseCondition(admin.StackedInline):
-    model = models.DiseaseCondition
+class TranslationInline(admin.StackedInline):
+    model = models.Translation
     extra = 1
 
 
-class InlineDiseaseName(admin.StackedInline):
-    model = models.DiseaseName
+class InformationInline(admin.StackedInline):
+    model = models.Information
     extra = 1
 
 
-class InlineSymptomName(admin.StackedInline):
-    model = models.SymptomName
+class Concept(admin.ModelAdmin):
+    inlines = [TranslationInline, InformationInline]
+    list_display = ('id', 'type', 'label')
+
+    @staticmethod
+    def label(concept):
+        try:
+            return concept.translation_set.get(language=settings.LANGUAGE_CODE)
+        except models.Translation.DoesNotExist:
+            return '-'
+
+    @staticmethod
+    def type(concept):
+        return 'Disease' if models.Disease.objects.filter(concept=concept).exists() \
+            else 'Symptom' if models.Symptom.objects.filter(concept=concept).exists() \
+            else 'Unknown'
+
+
+class AssociationInline(admin.StackedInline):
+    model = models.Association
     extra = 1
 
 
-class DiseaseAdmin(admin.ModelAdmin):
-    inlines = (InlineDiseaseName, InlineDiseaseSymptom, InlineDiseaseCondition)
-    list_display = ('concept', 'persian_name', 'related_symptoms_', 'related_conditions_count')
+class ConditionInline(admin.StackedInline):
+    model = models.Condition
+    extra = 1
 
 
-class SymptomAdmin(admin.ModelAdmin):
-    list_display = ('concept', 'persian_name')
-    inlines = (InlineSymptomName, )
+class Disease(admin.ModelAdmin):
+    inlines = [AssociationInline, ConditionInline]
+    list_display = ('concept_id', 'label', 'red_flag', 'triage')
+
+    @staticmethod
+    def concept_id(disease):
+        return disease.concept
+
+    @staticmethod
+    def label(disease):
+        try:
+            return disease.concept.translation_set.get(language=settings.LANGUAGE_CODE)
+        except models.Translation.DoesNotExist:
+            return '-'
 
 
-class ConditionAdmin(admin.ModelAdmin):
+class Symptom(admin.ModelAdmin):
+    list_display = ('concept_id', 'label')
+
+    @staticmethod
+    def concept_id(symptom):
+        return symptom.concept
+
+    @staticmethod
+    def label(symptom):
+        try:
+            return symptom.concept.translation_set.get(language=settings.LANGUAGE_CODE)
+        except models.Translation.DoesNotExist:
+            return '-'
+
+
+class PrimitiveCondition(admin.ModelAdmin):
     list_display = ('label', 'expression')
 
 
-admin.site.register(models.Disease, DiseaseAdmin)
-admin.site.register(models.Symptom, SymptomAdmin)
-admin.site.register(models.Condition, ConditionAdmin)
+admin.site.register(models.Concept, Concept)
+admin.site.register(models.PrimitiveCondition, PrimitiveCondition)
+admin.site.register(models.Disease, Disease)
+admin.site.register(models.Symptom, Symptom)

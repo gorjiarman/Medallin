@@ -3,5 +3,5 @@ from django.apps import AppConfig
 
 class PredictingConfig(AppConfig):
     name = 'predicting'
-    verbose_name = 'پیش‌بینی'
+    verbose_name = 'Predicting'
 

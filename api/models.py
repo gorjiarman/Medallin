@@ -1,17 +1,12 @@
 import uuid
 
 from django.db import models
-from django.contrib.postgres.fields.jsonb import JSONField
 
 
 class Token(models.Model):
-    label = models.CharField(max_length=64, null=True, blank=True, verbose_name='برچسب')
-    token = models.CharField(max_length=64, null=True, blank=True, unique=True, verbose_name='توکن', help_text='به صورت خودکار تکمیل خواهد شد.')
-    expires = models.DateTimeField(verbose_name='تاریخ انقضا')
-
-    class Meta:
-        verbose_name = 'توکن'
-        verbose_name_plural = 'توکن‌ها'
+    label = models.CharField(max_length=64, null=True, blank=True)
+    token = models.CharField(max_length=64, null=True, blank=True, unique=True)
+    expires = models.DateTimeField()
 
     def save(self, *args, **kwargs):
         if self.token is None:
@@ -19,4 +14,4 @@ class Token(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.label or 'توکن' + f' {self.id}'
+        return self.label or 'Token' + f' {self.id}'

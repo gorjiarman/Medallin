@@ -1,95 +1,80 @@
 from django.db import models
-from django.utils.safestring import mark_safe
+from django.conf import settings
+from django.utils.functional import cached_property
+
+
+API_LANGUAGES = {'en': 'English', 'fa': 'فارسی'}
 
 
 class Concept(models.Model):
-    concept = models.CharField(max_length=16, primary_key=True, verbose_name='شناسه')
-
-    class Meta:
-        abstract = True
-
-
-class Disease(Concept):
-    class Meta:
-        verbose_name = 'بیماری'
-        verbose_name_plural = 'بیماری‌ها'
-
-    def persian_name(self):
-        return DiseaseName.objects.get(disease=self, locale='fa-ir').string if DiseaseName.objects.filter(disease=self, locale='fa-ir').exists() else None
-
-    def related_symptoms_(self):
-        return mark_safe('<br>'.join(str(item) for item in self.diseasesymptom.symptoms.all()))
-
-    def related_conditions_count(self):
-        return self.diseasecondition_set.count()
-
-    persian_name.short_description = 'نام فارسی'
-    related_symptoms_.short_description = 'علائم مرتبط'
-    related_conditions_count.short_description = 'تعداد شرایط تعریف‌شده'
+    id = models.CharField(max_length=16, primary_key=True)
 
     def __str__(self):
-        return f'{self.concept} ({self.persian_name()})' if self.persian_name() else self.concept
+        return self.id
+
+    def label(self, language=None):
+        language = language or settings.LANGUAGE_CODE
+        return self.translation_set.get(language=language).string if self.translation_set.filter(language=language).exists() else None
 
 
-class Symptom(Concept):
+class Translation(models.Model):
+    concept = models.ForeignKey(to=Concept, on_delete=models.CASCADE)
+    language = models.CharField(max_length=2, choices=tuple(API_LANGUAGES.items()))
+    string = models.TextField()
+
     class Meta:
-        verbose_name = 'علامت'
-        verbose_name_plural = 'علائم'
+        unique_together = ('concept', 'language')
 
     def __str__(self):
-        return f'{self.concept} ({self.persian_name()})' if self.persian_name() else self.concept
-
-    def persian_name(self):
-        return SymptomName.objects.get(symptom=self, locale='fa-ir').string if SymptomName.objects.filter(symptom=self, locale='fa-ir').exists() else None
-
-    persian_name.short_description = 'نام فارسی'
+        return self.string
 
 
-class DiseaseSymptom(models.Model):
-    disease = models.OneToOneField(to=Disease, on_delete=models.CASCADE)
-    symptoms = models.ManyToManyField(to=Symptom, verbose_name='علامت‌های مرتبط')
+class Information(models.Model):
+    concept = models.ForeignKey(to=Concept, on_delete=models.CASCADE)
+    language = models.CharField(max_length=2, choices=tuple(API_LANGUAGES.items()))
+    string = models.TextField()
 
     class Meta:
-        verbose_name = 'علائم بیماری'
-        verbose_name_plural = 'علائم بیماری'
+        unique_together = ('concept', 'language')
 
 
-class Condition(models.Model):
-    label = models.CharField(max_length=256, verbose_name='برچسب')
-    expression = models.TextField(verbose_name='عبارت', help_text='متن وارد‌شده می‌بایست یک Expression معتبر پایتونی باشد. متغیر‌ها می‌بایست درون { } قرار گیرند.')
+class Disease(models.Model):
+    concept = models.OneToOneField(to=Concept, on_delete=models.CASCADE)
+    red_flag = models.BooleanField(default=False)
+    triage = models.CharField(max_length=6, choices=(('low', 'کم‌خطر'), ('medium', 'متوسط'), ('high', 'پر‌خطر')), null=True, blank=True)
+
+    def __str__(self):
+        return self.concept_id
+
+
+class Symptom(models.Model):
+    concept = models.OneToOneField(to=Concept, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.concept.label() or self.concept_id
+
+
+class Association(models.Model):
+    disease = models.ForeignKey(to=Disease, on_delete=models.CASCADE)
+    symptom = models.ForeignKey(to=Symptom, on_delete=models.CASCADE)
+    weight = models.IntegerField(default=1)
 
     class Meta:
-        verbose_name = 'شرایط'
-        verbose_name_plural = 'شرایط'
+        unique_together = ('disease', 'symptom')
+
+
+class PrimitiveCondition(models.Model):
+    label = models.CharField(max_length=256)
+    expression = models.TextField()
 
     def __str__(self):
         return self.label
 
 
-class DiseaseCondition(models.Model):
+class Condition(models.Model):
     disease = models.ForeignKey(to=Disease, on_delete=models.CASCADE)
-    conditions = models.ManyToManyField(to=Condition, verbose_name='شرایط لازمه')
-    factor = models.FloatField(verbose_name='ضریب تاثیر')
+    required_conditions = models.ManyToManyField(to=PrimitiveCondition, related_name='required_condition')
+    factor = models.FloatField()
 
-    class Meta:
-        verbose_name = 'شرایط بیماری'
-        verbose_name_plural = 'شرایط بیماری‌ها'
-
-
-class Name(models.Model):
-    locales = {'en': 'English (United States)', 'fa': 'فارسی (ایران)'}
-    locale = models.CharField(max_length=5, choices=tuple(locales.items()), verbose_name='زبان')
-    string = models.CharField(max_length=256, verbose_name='رشته')
-
-    class Meta:
-        abstract = True
-        verbose_name = 'عنوان'
-        verbose_name_plural = 'عناوین'
-
-
-class DiseaseName(Name):
-    disease = models.ForeignKey(to=Disease, on_delete=models.CASCADE)
-
-
-class SymptomName(Name):
-    symptom = models.ForeignKey(to=Symptom, on_delete=models.CASCADE)
+    def __str__(self):
+        return ' + '.join(self.required_conditions.values_list('label', flat=True))

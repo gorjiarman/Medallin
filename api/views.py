@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django_q.tasks import result as async_result, async_task
 
 from api import utils
-from predicting import models as prediction
+from predicting import models as prediction, engine
 
 
 def documentations(request):
@@ -14,14 +14,14 @@ def documentations(request):
 
 @utils.requires_token
 def list_symptoms(request):
-    symptoms = prediction.SymptomName.objects.filter(locale=request.LANGUAGE_CODE).order_by('string')
-    return JsonResponse({it.symptom_id: it.string for it in symptoms})
+    return JsonResponse({symptom.concept.id: symptom.concept.label(language=request.LANGUAGE_CODE)
+                         for symptom in prediction.Symptom.objects.all()})
 
 
 @utils.requires_token
 def list_diseases(request):
-    diseases = prediction.DiseaseName.objects.filter(locale=request.LANGUAGE_CODE).order_by('string')
-    return JsonResponse({it.disease_id: it.string for it in diseases})
+    return JsonResponse({disease.concept.id: disease.concept.label(language=request.LANGUAGE_CODE)
+                         for disease in prediction.Disease.objects.all()})
 
 
 @utils.requires_token
@@ -33,6 +33,6 @@ def predict(request):
     if request.POST:
         symptoms, profile = request.POST.get('symptoms'), request.POST.get('profile')
         symptoms, profile = json.loads(symptoms), json.loads(profile)
-        tracking_id = async_task('api.services.make_prediction', symptoms, profile)
+        tracking_id = async_task('predicting.engine.predict', symptoms, profile)
         return JsonResponse({'id': tracking_id})
     return HttpResponseBadRequest('Invalid request.')
