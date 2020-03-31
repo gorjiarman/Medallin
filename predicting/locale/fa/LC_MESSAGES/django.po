@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-31 17:46+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: apps.py:7
+msgid "Predicting"
+msgstr "پیش‌بینی"
+
+#: models.py:10
+msgid "ID"
+msgstr "ID"
+
+#: models.py:13 models.py:32 models.py:46 models.py:57 models.py:70
+msgid "Concept"
+msgstr "شناسه"
+
+#: models.py:14
+msgid "Concepts"
+msgstr "شناسه‌ها"
+
+#: models.py:22 models.py:93
+msgid "Label"
+msgstr "برچسب"
+
+#: models.py:28
+msgid "Type"
+msgstr "نوع"
+
+#: models.py:33 models.py:47
+msgid "Language"
+msgstr "زبان"
+
+#: models.py:34 models.py:48
+msgid "String"
+msgstr "رشته"
+
+#: models.py:37
+msgid "Translation"
+msgstr "ترجمه"
+
+#: models.py:38
+msgid "Translations"
+msgstr "ترجمه‌ها"
+
+#: models.py:51 models.py:52
+msgid "Information"
+msgstr "اطلاعات"
+
+#: models.py:58
+msgid "Red Flag"
+msgstr "پرچم قرمز"
+
+#: models.py:59
+msgid "Triage"
+msgstr "تریاژ"
+
+#: models.py:62 models.py:82 models.py:105
+msgid "Disease"
+msgstr "بیماری"
+
+#: models.py:63
+msgid "Diseases"
+msgstr "بیماری‌ها"
+
+#: models.py:71
+msgid "Values"
+msgstr "مقادیر"
+
+#: models.py:74 models.py:83
+msgid "Symptom"
+msgstr "علامت"
+
+#: models.py:75
+msgid "Symptoms"
+msgstr "علائم"
+
+#: models.py:84
+msgid "Weight"
+msgstr "وزن"
+
+#: models.py:87
+msgid "Association"
+msgstr "ارتباط"
+
+#: models.py:88
+msgid "Associations"
+msgstr "ارتباطات"
+
+#: models.py:94
+msgid "Expression"
+msgstr "عبارت"
+
+#: models.py:97
+msgid "Primitive Condition"
+msgstr "شرط پایه"
+
+#: models.py:98
+msgid "Primitive Conditions"
+msgstr "شرایط پایه"
+
+#: models.py:106
+msgid "Required Conditions"
+msgstr "شرایط مورد نیاز"
+
+#: models.py:107
+msgid "Factor"
+msgstr "مقدار"
+
+#: models.py:110
+msgid "Condition"
+msgstr "شرط"
+
+#: models.py:111
+msgid "Conditions"
+msgstr "شرایط"
