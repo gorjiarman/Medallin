@@ -25,9 +25,28 @@ def list_diseases(request):
 
 
 @utils.requires_token
-def info_on_concept(request, concept_id):
-    obj = get_object_or_404(prediction.Information, concept_id=concept_id)
-    return JsonResponse({'type': obj.concept.type(), 'description': obj.string})
+def info_on_symptom(request, concept_id):
+    symptom = get_object_or_404(prediction.Symptom, concept_id=concept_id)
+    information = prediction.Information.objects.filter(concept_id=concept_id)
+    payload = {
+        'label': symptom.concept.label(request.LANGUAGE_CODE),
+        'description': information.get().string if information.exists() else None,
+        'values': symptom.values
+    }
+    return JsonResponse(payload)
+
+
+@utils.requires_token
+def info_on_disease(request, concept_id):
+    disease = get_object_or_404(prediction.Disease, concept_id=concept_id)
+    information = prediction.Information.objects.filter(concept_id=concept_id)
+    payload = {
+        'label': disease.concept.label(request.LANGUAGE_CODE),
+        'description': information.get().string if information.exists() else None,
+        'red_flag': disease.red_flag,
+        'triage': disease.triage
+    }
+    return JsonResponse(payload)
 
 
 @utils.requires_token

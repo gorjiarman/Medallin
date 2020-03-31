@@ -54,6 +54,7 @@ class Disease(models.Model):
 
 class Symptom(models.Model):
     concept = models.OneToOneField(to=Concept, on_delete=models.CASCADE)
+    values = models.CharField(max_length=16, choices=(('[-1, 1]', '[-1, 1]'), ('[0, 1]', '[0, 1]'), ('-1, 0, 1', '-1, 0, 1')))
 
     def __str__(self):
         return self.concept.label() or self.concept_id
