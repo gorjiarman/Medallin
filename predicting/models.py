@@ -16,6 +16,11 @@ class Concept(models.Model):
         language = language or settings.LANGUAGE_CODE
         return self.translation_set.get(language=language).string if self.translation_set.filter(language=language).exists() else None
 
+    def type(self):
+        return 'Disease' if Disease.objects.filter(concept=self).exists() \
+            else 'Symptom' if Symptom.objects.filter(concept=self).exists() \
+            else 'Unknown'
+
 
 class Translation(models.Model):
     concept = models.ForeignKey(to=Concept, on_delete=models.CASCADE)

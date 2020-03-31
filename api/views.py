@@ -1,7 +1,7 @@
 import json
 
 from django.http import HttpResponseBadRequest, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django_q.tasks import result as async_result, async_task
 
 from api import utils
@@ -22,6 +22,12 @@ def list_symptoms(request):
 def list_diseases(request):
     return JsonResponse({disease.concept.id: disease.concept.label(language=request.LANGUAGE_CODE)
                          for disease in prediction.Disease.objects.all()})
+
+
+@utils.requires_token
+def info_on_concept(request, concept_id):
+    obj = get_object_or_404(prediction.Information, concept_id=concept_id)
+    return JsonResponse({'type': obj.concept.type(), 'description': obj.string})
 
 
 @utils.requires_token
