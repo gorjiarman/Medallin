@@ -17,6 +17,7 @@ class InformationInline(admin.StackedInline):
 class Concept(admin.ModelAdmin):
     inlines = [TranslationInline, InformationInline]
     list_display = ('id', 'type', 'label')
+    search_fields = ('id', )
 
     @staticmethod
     def label(concept):
@@ -24,12 +25,6 @@ class Concept(admin.ModelAdmin):
             return concept.translation_set.get(language=settings.LANGUAGE_CODE)
         except models.Translation.DoesNotExist:
             return '-'
-
-    @staticmethod
-    def type(concept):
-        return 'Disease' if models.Disease.objects.filter(concept=concept).exists() \
-            else 'Symptom' if models.Symptom.objects.filter(concept=concept).exists() \
-            else 'Unknown'
 
 
 class AssociationInline(admin.StackedInline):
@@ -45,6 +40,7 @@ class ConditionInline(admin.StackedInline):
 class Disease(admin.ModelAdmin):
     inlines = [AssociationInline, ConditionInline]
     list_display = ('concept_id', 'label', 'red_flag', 'triage')
+    search_fields = ('concept__id', )
 
     @staticmethod
     def concept_id(disease):
@@ -60,6 +56,7 @@ class Disease(admin.ModelAdmin):
 
 class Symptom(admin.ModelAdmin):
     list_display = ('concept_id', 'label')
+    search_fields = ('concept__id', )
 
     @staticmethod
     def concept_id(symptom):
