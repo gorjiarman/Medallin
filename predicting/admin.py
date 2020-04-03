@@ -55,7 +55,7 @@ class Disease(admin.ModelAdmin):
 
 
 class Symptom(admin.ModelAdmin):
-    list_display = ('concept_id', 'label')
+    list_display = ('concept_id', 'label', 'professional')
     search_fields = ('concept__id', )
 
     @staticmethod
