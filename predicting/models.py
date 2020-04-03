@@ -69,6 +69,7 @@ class Disease(models.Model):
 class Symptom(models.Model):
     concept = models.OneToOneField(to=Concept, on_delete=models.CASCADE, verbose_name=_('Concept'))
     values = models.CharField(max_length=16, choices=(('[-1, 1]', '[-1, 1]'), ('[0, 1]', '[0, 1]'), ('-1, 0, 1', '-1, 0, 1')), verbose_name=_('Values'))
+    professional = models.BooleanField(default=False, verbose_name=_('Professional'))
 
     class Meta:
         verbose_name = _('Symptom')
