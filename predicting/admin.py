@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 from predicting import models
 
@@ -27,9 +28,26 @@ class Concept(admin.ModelAdmin):
             return '-'
 
 
-class AssociationInline(admin.StackedInline):
+class AssociationViewingInline(admin.StackedInline):
+    model = models.Association
+    readonly_fields = ('symptom', )
+    extra = 0
+    verbose_name_plural = _('Current associations')
+
+    def has_add_permission(self, request, obj):
+        return False
+
+
+class AssociationAddingInline(admin.StackedInline):
     model = models.Association
     extra = 1
+    verbose_name_plural = _('Creating a new association')
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_view_permission(self, request, obj=None):
+        return False
 
 
 class ConditionInline(admin.StackedInline):
@@ -38,7 +56,7 @@ class ConditionInline(admin.StackedInline):
 
 
 class Disease(admin.ModelAdmin):
-    inlines = [AssociationInline, ConditionInline]
+    inlines = [AssociationViewingInline, AssociationAddingInline, ConditionInline]
     list_display = ('concept_id', 'label', 'red_flag', 'triage')
     search_fields = ('concept__id', )
 

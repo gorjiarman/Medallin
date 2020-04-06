@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-31 17:46+0430\n"
+"POT-Creation-Date: 2020-04-06 10:30+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: admin.py:35
+#, fuzzy
+#| msgid "Associations"
+msgid "Current associations"
+msgstr "ارتباطات فعلی"
+
+#: admin.py:44
+msgid "Creating a new association"
+msgstr "ایجاد ارتباطات تازه"
 
 #: apps.py:7
 msgid "Predicting"
@@ -34,7 +44,7 @@ msgstr "شناسه"
 msgid "Concepts"
 msgstr "شناسه‌ها"
 
-#: models.py:22 models.py:93
+#: models.py:22 models.py:94
 msgid "Label"
 msgstr "برچسب"
 
@@ -70,7 +80,7 @@ msgstr "پرچم قرمز"
 msgid "Triage"
 msgstr "تریاژ"
 
-#: models.py:62 models.py:82 models.py:105
+#: models.py:62 models.py:83 models.py:106
 msgid "Disease"
 msgstr "بیماری"
 
@@ -82,50 +92,56 @@ msgstr "بیماری‌ها"
 msgid "Values"
 msgstr "مقادیر"
 
-#: models.py:74 models.py:83
+#: models.py:72
+#, fuzzy
+#| msgid "Expression"
+msgid "Professional"
+msgstr "حرفه‌ای"
+
+#: models.py:75 models.py:84
 msgid "Symptom"
 msgstr "علامت"
 
-#: models.py:75
+#: models.py:76
 msgid "Symptoms"
 msgstr "علائم"
 
-#: models.py:84
+#: models.py:85
 msgid "Weight"
 msgstr "وزن"
 
-#: models.py:87
+#: models.py:88
 msgid "Association"
 msgstr "ارتباط"
 
-#: models.py:88
+#: models.py:89
 msgid "Associations"
 msgstr "ارتباطات"
 
-#: models.py:94
+#: models.py:95
 msgid "Expression"
 msgstr "عبارت"
 
-#: models.py:97
+#: models.py:98
 msgid "Primitive Condition"
 msgstr "شرط پایه"
 
-#: models.py:98
+#: models.py:99
 msgid "Primitive Conditions"
 msgstr "شرایط پایه"
 
-#: models.py:106
+#: models.py:107
 msgid "Required Conditions"
 msgstr "شرایط مورد نیاز"
 
-#: models.py:107
+#: models.py:108
 msgid "Factor"
 msgstr "مقدار"
 
-#: models.py:110
+#: models.py:111
 msgid "Condition"
 msgstr "شرط"
 
-#: models.py:111
+#: models.py:112
 msgid "Conditions"
 msgstr "شرایط"
