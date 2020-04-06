@@ -42,6 +42,7 @@ def info_on_disease(request, concept_id):
     information = prediction.Information.objects.filter(concept_id=concept_id)
     payload = {
         'label': disease.concept.label(request.LANGUAGE_CODE),
+        'type': disease.type.name if disease.type else None,
         'description': information.get().string if information.exists() else None,
         'red_flag': disease.red_flag,
         'triage': disease.triage

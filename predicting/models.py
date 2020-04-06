@@ -53,8 +53,21 @@ class Information(models.Model):
         unique_together = ('concept', 'language')
 
 
+class DiseaseType(models.Model):
+    name = models.CharField(max_length=256, verbose_name=_('Name'))
+    label = models.CharField(max_length=256, verbose_name=_('Label'), help_text=_('Only shown in admin.'))
+
+    class Meta:
+        verbose_name = _('Disease Type')
+        verbose_name_plural = _('Disease Types')
+
+    def __str__(self):
+        return self.label
+
+
 class Disease(models.Model):
     concept = models.OneToOneField(to=Concept, on_delete=models.CASCADE, verbose_name=_('Concept'))
+    type = models.ForeignKey(to=DiseaseType, on_delete=models.SET_NULL, null=True, blank=True)
     red_flag = models.BooleanField(default=False, verbose_name=_('Red Flag'))
     triage = models.CharField(max_length=6, choices=(('low', 'کم‌خطر'), ('medium', 'متوسط'), ('high', 'پر‌خطر')), null=True, blank=True, verbose_name=_('Triage'))
 

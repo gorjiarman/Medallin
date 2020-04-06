@@ -55,9 +55,14 @@ class ConditionInline(admin.StackedInline):
     extra = 1
 
 
+class DiseaseType(admin.ModelAdmin):
+    list_display = ('name', 'label')
+    search_fields = ('name', 'label')
+
+
 class Disease(admin.ModelAdmin):
     inlines = [AssociationViewingInline, AssociationAddingInline, ConditionInline]
-    list_display = ('concept_id', 'label', 'red_flag', 'triage')
+    list_display = ('concept_id', 'label', 'type', 'red_flag', 'triage')
     search_fields = ('concept__id', )
 
     @staticmethod
@@ -94,5 +99,6 @@ class PrimitiveCondition(admin.ModelAdmin):
 
 admin.site.register(models.Concept, Concept)
 admin.site.register(models.PrimitiveCondition, PrimitiveCondition)
+admin.site.register(models.DiseaseType, DiseaseType)
 admin.site.register(models.Disease, Disease)
 admin.site.register(models.Symptom, Symptom)
