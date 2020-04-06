@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-06 11:38+0430\n"
+"POT-Creation-Date: 2020-04-06 19:14+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: admin.py:35
+#: admin.py:49
 #, fuzzy
 #| msgid "Associations"
 msgid "Current associations"
 msgstr "ارتباطات فعلی"
 
-#: admin.py:44
+#: admin.py:58
 msgid "Creating a new association"
 msgstr "ایجاد ارتباطات تازه"
 
@@ -36,7 +36,7 @@ msgstr "پیش‌بینی"
 msgid "ID"
 msgstr "ID"
 
-#: models.py:13 models.py:32 models.py:46 models.py:69 models.py:83
+#: models.py:13 models.py:32 models.py:58 models.py:90 models.py:104
 msgid "Concept"
 msgstr "شناسه"
 
@@ -44,7 +44,7 @@ msgstr "شناسه"
 msgid "Concepts"
 msgstr "شناسه‌ها"
 
-#: models.py:22 models.py:58 models.py:107
+#: models.py:22 models.py:47 models.py:79 models.py:128
 msgid "Label"
 msgstr "برچسب"
 
@@ -52,11 +52,11 @@ msgstr "برچسب"
 msgid "Type"
 msgstr "نوع"
 
-#: models.py:33 models.py:47
+#: models.py:33 models.py:59
 msgid "Language"
 msgstr "زبان"
 
-#: models.py:34 models.py:48
+#: models.py:34
 msgid "String"
 msgstr "رشته"
 
@@ -68,100 +68,126 @@ msgstr "ترجمه"
 msgid "Translations"
 msgstr "ترجمه‌ها"
 
-#: models.py:51 models.py:52
-msgid "Information"
-msgstr "اطلاعات"
-
-#: models.py:57
+#: models.py:46 models.py:78
 msgid "Name"
 msgstr "نام"
 
-#: models.py:58
+#: models.py:47
+#, fuzzy
+#| msgid "Only shown in admin."
+msgid "Shown in admin only."
+msgstr "فقط در پنل مدیریت سیستم نمایش خواهد یافت."
+
+#: models.py:50
+msgid "Property"
+msgstr "ویژگی"
+
+#: models.py:51
+msgid "Properties"
+msgstr "ویژگی‌ها"
+
+#: models.py:62 models.py:63
+msgid "Information"
+msgstr "اطلاعات"
+
+#: models.py:73
+#, fuzzy
+#| msgid "Information"
+msgid "Information Property"
+msgstr "اطلاعات"
+
+#: models.py:74
+#, fuzzy
+#| msgid "Information"
+msgid "Information Properties"
+msgstr "اطلاعات"
+
+#: models.py:79
 msgid "Only shown in admin."
 msgstr "فقط در پنل مدیریت سیستم نمایش خواهد یافت."
 
-#: models.py:61
+#: models.py:82
 #, fuzzy
 #| msgid "Disease"
 msgid "Disease Type"
 msgstr "نوع بیماری"
 
-#: models.py:62
+#: models.py:83
 #, fuzzy
 #| msgid "Diseases"
 msgid "Disease Types"
 msgstr "نوع‌های بیماری‌ها"
 
-#: models.py:71
+#: models.py:92
 msgid "Red Flag"
 msgstr "پرچم قرمز"
 
-#: models.py:72
+#: models.py:93
 msgid "Triage"
 msgstr "تریاژ"
 
-#: models.py:75 models.py:96 models.py:119
+#: models.py:96 models.py:117 models.py:140
 msgid "Disease"
 msgstr "بیماری"
 
-#: models.py:76
+#: models.py:97
 msgid "Diseases"
 msgstr "بیماری‌ها"
 
-#: models.py:84
+#: models.py:105
 msgid "Values"
 msgstr "مقادیر"
 
-#: models.py:85
+#: models.py:106
 #, fuzzy
 #| msgid "Expression"
 msgid "Professional"
 msgstr "حرفه‌ای"
 
-#: models.py:88 models.py:97
+#: models.py:109 models.py:118
 msgid "Symptom"
 msgstr "علامت"
 
-#: models.py:89
+#: models.py:110
 msgid "Symptoms"
 msgstr "علائم"
 
-#: models.py:98
+#: models.py:119
 msgid "Weight"
 msgstr "وزن"
 
-#: models.py:101
+#: models.py:122
 msgid "Association"
 msgstr "ارتباط"
 
-#: models.py:102
+#: models.py:123
 msgid "Associations"
 msgstr "ارتباطات"
 
-#: models.py:108
+#: models.py:129
 msgid "Expression"
 msgstr "عبارت"
 
-#: models.py:111
+#: models.py:132
 msgid "Primitive Condition"
 msgstr "شرط پایه"
 
-#: models.py:112
+#: models.py:133
 msgid "Primitive Conditions"
 msgstr "شرایط پایه"
 
-#: models.py:120
+#: models.py:141
 msgid "Required Conditions"
 msgstr "شرایط مورد نیاز"
 
-#: models.py:121
+#: models.py:142
 msgid "Factor"
 msgstr "مقدار"
 
-#: models.py:124
+#: models.py:145
 msgid "Condition"
 msgstr "شرط"
 
-#: models.py:125
+#: models.py:146
 msgid "Conditions"
 msgstr "شرایط"

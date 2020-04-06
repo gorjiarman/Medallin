@@ -27,26 +27,28 @@ def list_diseases(request):
 @utils.requires_token
 def info_on_symptom(request, concept_id):
     symptom = get_object_or_404(prediction.Symptom, concept_id=concept_id)
-    information = prediction.Information.objects.filter(concept_id=concept_id)
+    properties = prediction.InformationProperty.objects.filter(information__concept_id=concept_id, information__language=request.LANGUAGE_CODE)
     payload = {
         'label': symptom.concept.label(request.LANGUAGE_CODE),
-        'description': information.get().string if information.exists() else None,
         'values': symptom.values
     }
+    for symptom_property in properties:
+        payload[symptom_property.property.name] = symptom_property.value
     return JsonResponse(payload)
 
 
 @utils.requires_token
 def info_on_disease(request, concept_id):
     disease = get_object_or_404(prediction.Disease, concept_id=concept_id)
-    information = prediction.Information.objects.filter(concept_id=concept_id)
+    properties = prediction.InformationProperty.objects.filter(information__concept_id=concept_id, information__language=request.LANGUAGE_CODE)
     payload = {
         'label': disease.concept.label(request.LANGUAGE_CODE),
         'type': disease.type.name if disease.type else None,
-        'description': information.get().string if information.exists() else None,
         'red_flag': disease.red_flag,
         'triage': disease.triage
     }
+    for disease_property in properties:
+        payload[disease_property.property.name] = disease_property.value
     return JsonResponse(payload)
 
 

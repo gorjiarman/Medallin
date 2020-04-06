@@ -10,13 +10,8 @@ class TranslationInline(admin.StackedInline):
     extra = 1
 
 
-class InformationInline(admin.StackedInline):
-    model = models.Information
-    extra = 1
-
-
 class Concept(admin.ModelAdmin):
-    inlines = [TranslationInline, InformationInline]
+    inlines = [TranslationInline]
     list_display = ('id', 'type', 'label')
     search_fields = ('id', )
 
@@ -26,6 +21,25 @@ class Concept(admin.ModelAdmin):
             return concept.translation_set.get(language=settings.LANGUAGE_CODE)
         except models.Translation.DoesNotExist:
             return '-'
+
+
+class Property(admin.ModelAdmin):
+    list_display = ('name', 'label')
+
+
+class InformationPropertyInline(admin.StackedInline):
+    model = models.InformationProperty
+    extra = 1
+
+
+class Information(admin.ModelAdmin):
+    inlines = [InformationPropertyInline]
+    list_display = ('concept', 'language', 'properties')
+    list_filter = ('language', )
+
+    @staticmethod
+    def properties(information):
+        return models.InformationProperty.objects.filter(information=information).count()
 
 
 class AssociationViewingInline(admin.StackedInline):
@@ -108,6 +122,8 @@ class PrimitiveCondition(admin.ModelAdmin):
 
 
 admin.site.register(models.Concept, Concept)
+admin.site.register(models.Property, Property)
+admin.site.register(models.Information, Information)
 admin.site.register(models.PrimitiveCondition, PrimitiveCondition)
 admin.site.register(models.DiseaseType, DiseaseType)
 admin.site.register(models.Disease, Disease)

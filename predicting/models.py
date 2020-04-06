@@ -14,7 +14,7 @@ class Concept(models.Model):
         verbose_name_plural = _('Concepts')
 
     def __str__(self):
-        return self.id
+        return self.label() or self.id
 
     def label(self, language=None):
         language = language or settings.LANGUAGE_CODE
@@ -42,15 +42,36 @@ class Translation(models.Model):
         return self.string
 
 
+class Property(models.Model):
+    name = models.CharField(max_length=128, verbose_name=_('Name'))
+    label = models.CharField(max_length=128, verbose_name=_('Label'), help_text=_('Shown in admin only.'))
+
+    class Meta:
+        verbose_name = _('Property')
+        verbose_name_plural = _('Properties')
+
+    def __str__(self):
+        return self.label
+
+
 class Information(models.Model):
     concept = models.ForeignKey(to=Concept, on_delete=models.CASCADE, verbose_name=_('Concept'))
     language = models.CharField(max_length=2, choices=tuple(API_LANGUAGES.items()), verbose_name=_('Language'))
-    string = models.TextField(verbose_name=_('String'))
 
     class Meta:
         verbose_name = _('Information')
         verbose_name_plural = _('Information')
         unique_together = ('concept', 'language')
+
+
+class InformationProperty(models.Model):
+    information = models.ForeignKey(to=Information, on_delete=models.CASCADE)
+    property = models.ForeignKey(to=Property, on_delete=models.CASCADE)
+    value = models.TextField()
+
+    class Meta:
+        verbose_name = _('Information Property')
+        verbose_name_plural = _('Information Properties')
 
 
 class DiseaseType(models.Model):
@@ -76,7 +97,7 @@ class Disease(models.Model):
         verbose_name_plural = _('Diseases')
 
     def __str__(self):
-        return self.concept_id
+        return self.concept.label() or self.concept_id
 
 
 class Symptom(models.Model):
