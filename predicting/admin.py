@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
-from predicting import models
+from predicting import models, utils
 
 
 class TranslationInline(admin.StackedInline):
@@ -76,6 +76,11 @@ class Disease(admin.ModelAdmin):
         except models.Translation.DoesNotExist:
             return '-'
 
+    def get_search_results(self, request, queryset, search_term):
+        queryset, use_distinct = super().get_search_results(request, queryset, search_term)
+        matching_concepts = utils.search_within_translations(search_term)
+        return queryset | models.Disease.objects.filter(concept_id__in=matching_concepts), use_distinct
+
 
 class Symptom(admin.ModelAdmin):
     list_display = ('concept_id', 'label', 'professional')
@@ -91,6 +96,11 @@ class Symptom(admin.ModelAdmin):
             return symptom.concept.translation_set.get(language=settings.LANGUAGE_CODE)
         except models.Translation.DoesNotExist:
             return '-'
+
+    def get_search_results(self, request, queryset, search_term):
+        queryset, use_distinct = super().get_search_results(request, queryset, search_term)
+        matching_concepts = utils.search_within_translations(search_term)
+        return queryset | models.Symptom.objects.filter(concept_id__in=matching_concepts), use_distinct
 
 
 class PrimitiveCondition(admin.ModelAdmin):
