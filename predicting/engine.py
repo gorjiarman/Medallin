@@ -45,23 +45,26 @@ def predict(symptoms: dict, profile: dict):
         current_score = scores.setdefault(disease, 0)
         scores[disease] = current_score - score
     factors = dict()
-    conditions = matching_conditions(profile)
+    patients_conditions = matching_conditions(profile)
     for disease in scores:
         related_conditions = models.Condition.objects.filter(disease__concept_id=disease)
-        for condition in conditions:
+        for condition in patients_conditions:
             related_conditions = related_conditions.filter(required_conditions=condition)
         try:
             applying_condition = related_conditions.get()
         except models.Condition.DoesNotExist:
             applying_condition = None
         except models.Condition.MultipleObjectsReturned:
-            max_matches = 0
-            applying_condition = None
+            factors_matches = []
             for condition in related_conditions:
-                condition_matches = len([condition for condition in condition.required_conditions.all() if condition in conditions])
-                if condition_matches > max_matches:
-                    applying_condition = condition
-                    max_matches = condition_matches
+                matching_primitive_conditions = [primitive_condition for primitive_condition in condition.required_conditions.all() if primitive_condition in patients_conditions]
+                factors_matches.append((len(matching_primitive_conditions), -condition.factor))
+                # When looking for maximum, Python first looks at the first element of the tuple and then if the first
+                # element of two tuples matches, the second one. We want it to look for the greatest number of matches
+                # but the least value of factor. We can negate the second element and do the whole lookup in one call to
+                # the build-in max function.
+            applying_condition = factors_matches.index(max(factors_matches))
+            applying_condition = related_conditions[applying_condition]
         factors[disease] = applying_condition.factor if applying_condition else None
     predictions = sort_diseases(scores, factors)
     suggestions = matching_symptoms(scores.keys(), symptoms.keys())
