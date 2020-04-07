@@ -55,6 +55,7 @@ class AssociationViewingInline(admin.StackedInline):
 class AssociationAddingInline(admin.StackedInline):
     model = models.Association
     extra = 1
+    autocomplete_fields = ('symptom', )
     verbose_name_plural = _('Creating a new association')
 
     def has_change_permission(self, request, obj=None):
