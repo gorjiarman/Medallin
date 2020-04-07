@@ -37,6 +37,14 @@ class Information(admin.ModelAdmin):
     list_display = ('concept', 'language', 'properties')
     list_filter = ('language', )
     autocomplete_fields = ('concept', )
+    search_fields = ('concept_id', )
+
+    def get_search_results(self, request, queryset, search_term):
+        concepts = models.Concept.objects.filter(id__contains=search_term)
+        translations = models.Translation.objects.filter(string__contains=search_term).values('concept_id')
+        concepts = concepts | models.Concept.objects.filter(id__in=translations)
+        results = models.Information.objects.filter(concept__in=concepts)
+        return results, False
 
     @staticmethod
     def properties(information):
