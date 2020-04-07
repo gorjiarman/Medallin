@@ -36,6 +36,7 @@ class Information(admin.ModelAdmin):
     inlines = [InformationPropertyInline]
     list_display = ('concept', 'language', 'properties')
     list_filter = ('language', )
+    autocomplete_fields = ('concept', )
 
     @staticmethod
     def properties(information):
