@@ -26,8 +26,8 @@ def matching_conditions(profile):
 
 
 def sort_diseases(scores, factors):
-    diseases = [(disease, scores[disease], scores[disease] / models.Association.objects.filter(disease__concept_id=disease).aggregate(Sum('weight')).get('weight__sum'), factors[disease]) for disease in scores.keys()]
-    diseases = sorted(diseases, key=lambda tup: tup[1:], reverse=True)
+    diseases = [(disease,  scores[disease], factors[disease], scores[disease] / models.Association.objects.filter(disease__concept_id=disease).aggregate(Sum('weight')).get('weight__sum')) for disease in scores.keys()]
+    diseases = sorted(diseases, key=lambda tup: [x if x is not None else 0 for x in tup[1:]], reverse=True)
     return diseases[:10]
 
 
