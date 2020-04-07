@@ -144,6 +144,3 @@ class Condition(models.Model):
     class Meta:
         verbose_name = _('Condition')
         verbose_name_plural = _('Conditions')
-
-    def __str__(self):
-        return ' + '.join(self.required_conditions.values_list('label', flat=True))
