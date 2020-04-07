@@ -116,7 +116,7 @@ class Symptom(models.Model):
 class Association(models.Model):
     disease = models.ForeignKey(to=Disease, on_delete=models.CASCADE, verbose_name=_('Disease'))
     symptom = models.ForeignKey(to=Symptom, on_delete=models.CASCADE, verbose_name=_('Symptom'))
-    weight = models.IntegerField(default=1, verbose_name=_('Weight'))
+    weight = models.FloatField(default=1, verbose_name=_('Weight'))
 
     class Meta:
         verbose_name = _('Association')
