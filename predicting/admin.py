@@ -34,7 +34,7 @@ class InformationPropertyInline(admin.StackedInline):
 
 class Information(admin.ModelAdmin):
     inlines = [InformationPropertyInline]
-    list_display = ('information_concept_id', 'concept_label', 'language', 'properties')
+    list_display = ('concept_id', 'concept_label', 'language', 'properties')
     list_filter = ('language', )
     autocomplete_fields = ('concept', )
     search_fields = ('concept_id', )
@@ -45,10 +45,6 @@ class Information(admin.ModelAdmin):
         concepts = concepts | models.Concept.objects.filter(id__in=translations)
         results = models.Information.objects.filter(concept__in=concepts)
         return results, False
-
-    @staticmethod
-    def information_concept_id(information):
-        return information.concept.id
 
     @staticmethod
     def concept_label(information):
