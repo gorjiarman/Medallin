@@ -14,7 +14,7 @@ class Concept(models.Model):
         verbose_name_plural = _('Concepts')
 
     def __str__(self):
-        return self.label() or self.id
+        return self.id
 
     def label(self, language=None):
         language = language or settings.LANGUAGE_CODE
