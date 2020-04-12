@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_q',
     'predicting',
-    'api'
+    'api',
+    'testmedall'
 ]
 
 MIDDLEWARE = [
