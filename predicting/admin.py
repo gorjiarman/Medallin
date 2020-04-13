@@ -102,7 +102,7 @@ class Disease(admin.ModelAdmin):
         try:
             return disease.concept.translation_set.get(language=settings.LANGUAGE_CODE)
         except models.Translation.DoesNotExist:
-            return '-'
+            return '---'
 
     def get_search_results(self, request, queryset, search_term):
         queryset, use_distinct = super().get_search_results(request, queryset, search_term)
