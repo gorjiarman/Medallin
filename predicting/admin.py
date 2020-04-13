@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 from predicting import models, utils
@@ -18,7 +17,7 @@ class Concept(admin.ModelAdmin):
     @staticmethod
     def label(concept):
         try:
-            return concept.translation_set.get(language=settings.LANGUAGE_CODE)
+            return concept.translation_set.get(language=models.ADMIN_DEFAULT_LANGUAGE)
         except models.Translation.DoesNotExist:
             return '-'
 
@@ -100,7 +99,7 @@ class Disease(admin.ModelAdmin):
     @staticmethod
     def label(disease):
         try:
-            return disease.concept.translation_set.get(language=settings.LANGUAGE_CODE)
+            return disease.concept.translation_set.get(language=models.ADMIN_DEFAULT_LANGUAGE)
         except models.Translation.DoesNotExist:
             return '---'
 
@@ -121,7 +120,7 @@ class Symptom(admin.ModelAdmin):
     @staticmethod
     def label(symptom):
         try:
-            return symptom.concept.translation_set.get(language=settings.LANGUAGE_CODE)
+            return symptom.concept.translation_set.get(language=models.ADMIN_DEFAULT_LANGUAGE)
         except models.Translation.DoesNotExist:
             return '-'
 
