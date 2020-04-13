@@ -1,9 +1,9 @@
 from django.db import models
-from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 
 API_LANGUAGES = {'en': 'English', 'fa': 'فارسی'}
+ADMIN_DEFAULT_LANGUAGE = 'fa'  # Specifies the language the concept labels will be shown in.
 
 
 class Concept(models.Model):
@@ -17,7 +17,7 @@ class Concept(models.Model):
         return self.id
 
     def label(self, language=None):
-        language = language or settings.LANGUAGE_CODE
+        language = language or ADMIN_DEFAULT_LANGUAGE
         return self.translation_set.get(language=language).string if self.translation_set.filter(language=language).exists() else None
     label.short_description = _('Label')
 
