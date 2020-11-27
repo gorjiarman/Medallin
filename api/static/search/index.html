@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Search | Medallin</title>
+<meta name="generator" content="Jekyll v3.7.2" />
+<meta property="og:title" content="Search" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Documentation for Medallin’s Prediction Engine." />
+<meta property="og:description" content="Documentation for Medallin’s Prediction Engine." />
+<link rel="canonical" href="https://medallin.com/search/" />
+<meta property="og:url" content="https://medallin.com/search/" />
+<meta property="og:site_name" content="Medallin" />
+<script type="application/ld+json">
+{"@type":"WebPage","description":"Documentation for Medallin’s Prediction Engine.","url":"https://medallin.com/search/","headline":"Search","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="icon" type="image/png" href="/favicon.png">
+
+		
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="/js/main.js"></script>
+	</head>
+	<body>
+		<header>
+			<form action="/search/" method="get">
+				<input type="text" name="q" id="search-input" placeholder="Search">
+				<input type="submit" value="Search" style="display: none;">
+			</form>
+
+			<div id="sidebar" class="sidebar">
+	
+	
+		
+	
+		
+			<section>
+				<h6>Documentation</h6>
+				<ul>
+					
+					
+						<li>
+							<a href="/#documentationgetting_started">
+								Medallin Prediction API
+								
+							</a>
+						</li>
+					
+						<li>
+							<a href="/#documentationauthentication">
+								Authentication
+								
+							</a>
+						</li>
+					
+						<li>
+							<a href="/#documentationerrors">
+								Request Statuses
+								
+							</a>
+						</li>
+					
+				</ul>
+			</section>
+		
+	
+		
+			<section>
+				<h6>APIs</h6>
+				<ul>
+					
+					
+						<li>
+							<a href="/#apidiseases_list">
+								/list/diseases
+								<span class="endpoint get"></span>
+							</a>
+						</li>
+					
+						<li>
+							<a href="/#apisymptoms_list">
+								/list/symptoms
+								<span class="endpoint get"></span>
+							</a>
+						</li>
+					
+						<li>
+							<a href="/#apimake_prediction">
+								/predict
+								<span class="endpoint post"></span>
+							</a>
+						</li>
+					
+						<li>
+							<a href="/#apiget_prediction_result">
+								/predict
+								<span class="endpoint get"></span>
+							</a>
+						</li>
+					
+				</ul>
+			</section>
+		
+	
+</div>
+
+
+			<p class="copyright" style="display: none">
+				<a href="https://cloudcannon.com/">
+					Template by CloudCannon
+				</a>
+			</p>
+		</header>
+		<div class="main">
+			<div class="search-page">
+	<h2>Search Results</h2>
+
+	<p><span id="search-process">Loading</span> results <span id="search-query-container" style="display: none;">for "<strong id="search-query"></strong>"</span></p>
+	<ul id="search-results"></ul>
+</div>
+
+<script>
+	window.data = {
+		
+			
+				
+					
+						
+						
+						"api-diseases-list": {
+							"id": "api-diseases-list",
+							"title": "/list/diseases",
+							"category": "api",
+							"description": "Lists all the diseases available in the system.",
+		  				"type": "get",
+							"url": "/#apidiseases_list",
+							"content": ""
+						}
+						
+					
+				
+			
+				
+					
+						,
+						
+						"api-get-prediction-result": {
+							"id": "api-get-prediction-result",
+							"title": "/predict",
+							"category": "api",
+							"description": "Retrieves the result of a prediction request.",
+		  				"type": "get",
+							"url": "/#apiget_prediction_result",
+							"content": ""
+						}
+						
+					
+				
+			
+				
+					
+						,
+						
+						"api-make-prediction": {
+							"id": "api-make-prediction",
+							"title": "/predict",
+							"category": "api",
+							"description": "Makes a prediction and suggests other symptoms for furthering the examination.",
+		  				"type": "post",
+							"url": "/#apimake_prediction",
+							"content": ""
+						}
+						
+					
+				
+			
+				
+					
+						,
+						
+						"api-symptoms-list": {
+							"id": "api-symptoms-list",
+							"title": "/list/symptoms",
+							"category": "api",
+							"description": "Lists all the symptoms available in the system.",
+		  				"type": "get",
+							"url": "/#apisymptoms_list",
+							"content": ""
+						}
+						
+					
+				
+			
+		
+			
+				
+					
+						,
+						
+						"documentation-authentication": {
+							"id": "documentation-authentication",
+							"title": "Authentication",
+							"category": "documentation",
+							"description": "",
+		  				"type": "",
+							"url": "/#documentationauthentication",
+							"content": ""
+						}
+						
+					
+				
+			
+				
+					
+						,
+						
+						"documentation-errors": {
+							"id": "documentation-errors",
+							"title": "Request Statuses",
+							"category": "documentation",
+							"description": "",
+		  				"type": "",
+							"url": "/#documentationerrors",
+							"content": ""
+						}
+						
+					
+				
+			
+				
+					
+						,
+						
+						"documentation-getting-started": {
+							"id": "documentation-getting-started",
+							"title": "Medallin Prediction API",
+							"category": "documentation",
+							"description": "",
+		  				"type": "",
+							"url": "/#documentationgetting_started",
+							"content": ""
+						}
+						
+					
+				
+			
+		
+			
+		
+	};
+</script>
+<script src="/js/lunr.min.js"></script>
+<script src="/js/search.js"></script>
+
+		</div>
+		<script>
+			document.getElementById("open-nav").addEventListener("click", function () {
+				document.body.classList.toggle("nav-open");
+			});
+		</script>
+	</body>
+</html>
