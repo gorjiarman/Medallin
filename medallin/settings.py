@@ -23,7 +23,7 @@ SECRET_KEY = 'wrizhzkv!roeok-gmd0%-phpl!tvh1hn_@zkg)i-0(fa^bc8_e'  # SECURITY WA
 
 DEBUG = True  # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 
 # Application definition
 
@@ -83,8 +83,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'medallin',
-        'USER': 'django',
-        'PASSWORD': '',
+        'USER': 'arman',
+        'PASSWORD': '12345',
         'HOST': 'localhost',
         'PORT': '',
     }

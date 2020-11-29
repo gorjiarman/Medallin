@@ -6,7 +6,7 @@ from django_q.tasks import result as async_result, async_task
 
 from api import utils
 from predicting import models as prediction, engine
-
+from predicting import models as concept
 
 def documentations(request):
     return render(request, 'api-docs.html')
@@ -34,6 +34,15 @@ def info_on_symptom(request, concept_id):
     }
     for symptom_property in properties:
         payload[symptom_property.property.name] = symptom_property.value
+    return JsonResponse(payload)
+
+
+@utils.requires_token
+def concept_of_string(request, string):
+    concepts = get_object_or_404(concept.Translation, string=string)
+    payload = {
+        'concept_id': concepts.concept.id
+    }
     return JsonResponse(payload)
 
 
