@@ -389,6 +389,49 @@
     <section class="doc-content">
         <section class="left-docs">
             <h3>
+                <a id="apiconceptsearch_list">
+                    /concept/string
+
+                    <span class="endpoint get"></span>
+
+                </a>
+                <a class="editor-link" href="cloudcannon:collections/_api/symptoms_list.md">Edit</a>
+            </h3>
+
+            <p class="description">Lists all the symptoms available in the system.</p>
+
+
+            <h6>Parameters</h6>
+            <dl>
+
+                <dt>Accept-Language</dt>
+                <dd>(HTTP Header) Preferred language for the names of the symptoms.</dd>
+
+            </dl>
+
+
+            <div title="Response" class="language-json highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"C0015967"</span><span class="p">:</span><span class="w"> </span><span
+                        class="s2">"Fever"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"C0010200"</span><span class="p">:</span><span class="w"> </span><span
+                        class="s2">"Cough"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"C1260880"</span><span class="p">:</span><span class="w"> </span><span
+                        class="s2">"Rhinorrhea"</span><span class="p">,</span><span class="w">
+  </span><span class="err">...</span><span class="w">              
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+                </div>
+            </div>
+
+
+        </section>
+
+    </section>
+
+    <section class="doc-content">
+        <section class="left-docs">
+            <h3>
                 <a id="apisymptom_info">
                     /info/symptom/ID/
 
