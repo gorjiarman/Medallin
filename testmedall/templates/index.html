@@ -37,29 +37,6 @@ href = "{% static 'css/main.css' %}" />
                 btn.innerHTML = "سلام، چند سالتونه؟";
                 setHelper("سن خود را به عدد وارد کنید.")
                 document.getElementById("divid2").appendChild(btn);
-<!--                axios.defaults.headers.post['Content-Type'] ='application/json';-->
-<!--                axios.get('http://185.97.117.155/api/list/symptoms/', { headers: {-->
-<!--                'Accept-Language': 'fa',-->
-<!--                Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f' } })-->
-<!--                    .then((response) => {-->
-<!--                        symptoms_name = response.data;-->
-<!--                        axios.get('http://185.97.117.155/api/list/diseases/', { headers: {-->
-<!--                        'Accept-Language': 'fa',-->
-<!--                         Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f' } })-->
-<!--                            .then((response) => {-->
-<!--                                diseases = response.data;-->
-<!--                            }).catch((error) => {-->
-<!--                                console.log(error);-->
-
-<!--                }).then(() => {-->
-<!--                    console.log('fuckedup');-->
-<!--                });-->
-<!--                   -->
-<!--                }).catch((error) => {-->
-<!--                    console.log(error);-->
-<!--                }).then(() => {-->
-<!--                    console.log('fuckedup');-->
-<!--                });-->
                 con++;
             }
             else if(con ==1)
@@ -88,16 +65,12 @@ href = "{% static 'css/main.css' %}" />
             {
                 var symptom = document.getElementById("myInput").value;
                 getPredictFromSymptom(symptom,1);
-<!--                searchedID = getConceptFromString(symptom);-->
-<!--                console.log(searchedID);-->
                 con++;
             }
             else if(con ==4)
             {
                 console.log('here we are');
                 var answer = document.getElementById("myInput").value;
-<!--                searchedID = getConceptFromString(answer);-->
-<!--                console.log(searchedID);-->
                 if(answer =="y")
                 {
 
@@ -126,12 +99,10 @@ href = "{% static 'css/main.css' %}" />
         }
         function getPredictFromSymptom(symptomString,symptomValue)
         {
+            getConceptFromString(symptomString).then((response) => {
             var symptomsString='{';
-            searchedID = getConceptFromString(symptomString);
-
-<!--            translatedsymptom = getKeyByValue(symptoms_name,symptomString);-->
-            mySymptoms['"'+searchedID+'"'] = symptomValue;
-            console.log(searchedID);
+            mySymptoms['"'+response+'"'] = symptomValue;
+            console.log( response);
             var bodyFormData = new FormData();
             for(mySymptom in mySymptoms)
             {
@@ -141,8 +112,13 @@ href = "{% static 'css/main.css' %}" />
             symptomsString=symptomsString.replace(",}","}");
             bodyFormData.set('profile', '{"age": '+age+',"gender": "'+gender+'"}');
             bodyFormData.set('symptoms', symptomsString);
+            console.log( '{"age": '+age+',"gender": "'+gender+'"}');
+            console.log(symptomsString);
+            axios.defaults.headers.post['Content-Type'] ='application/json';
             axios.post('https://www.medallin.ir/api/predict/', bodyFormData, { headers: {
-            Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f' } })
+          
+            Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f'
+            }})
                 .then((response) => {
                     console.log(response.data);
                     getPredictFromId(response.data.id)
@@ -150,12 +126,17 @@ href = "{% static 'css/main.css' %}" />
                     console.log(error);
                 }).then(() => {
                     console.log('fuckedup');
-                });               
-        }    
+                });
+            });
+
+        }
+
         function getPredictFromId(id)
         {
             axios.get('https://www.medallin.ir/api/predict/?id='+id, { headers: {
-                Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f' } })
+                Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f' ,
+                  'Accept-Language': 'fa'
+            } })
                     .then((response) => {
                         console.log(response.data);
                         if(response.data.status=="pending")
@@ -169,45 +150,120 @@ href = "{% static 'css/main.css' %}" />
                             btn.style.fontSize="5vh";
                             btn.innerHTML = 'بیماری ها :';
                             document.getElementById("divid2").appendChild(btn);
-                            con2 =0;
-                            while(con2<10)
-                            {
-                                var btn = document.createElement("DIV");
+                            const forLoop = async _ => {
+                            console.log('Start')
+
+                            for (let index = 0; index < 10; index++) {
+                           
+                                console.log(response.data.result.predictions[index][0]);
+                                axios.get('https://www.medallin.ir/api/info/disease/'+response.data.result.predictions[index][0], { headers: {
+                                   Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f' ,
+                                      'Accept-Language': 'fa'
+                                } })
+                                .then((response) => {
+                                   console.log(response.data);
+                                   answer = response.data.label;
+                                  console.log(answer);
+                                   var btn = document.createElement("DIV");
                                 btn.style.fontSize="5vh";
-                                btn.innerHTML = diseases[response.data.result.predictions[con2][0]];
-                                btn.style.color="red"
+                                btn.innerHTML = answer;
+                                btn.style.color="red";
                                 document.getElementById("divid2").appendChild(btn);
-                                con2++;
+
+                                }).catch((error) => {
+                                    console.log(error);
+                                }).then(() => {
+                                });                                
+                                
                             }
+
+                            console.log('End')
+                            }
+                            forLoop().then(()=>{
+                            getStringFromConceptSymptom(response.data.result.suggestions[0]).then((response1) => {
+                                
+                            console.log('fuckedup');
                             window.scrollTo(0,document.getElementById("divid2").scrollHeight);
                             setHelper("y = آره , n = نه , u = نمیدونم");
                             var btn = document.createElement("DIV");
                             btn.style.fontSize="5vh";
                             btn.style.backgroundColor="gray"
-                            btn.innerHTML = "آیا "+ symptoms_name[response.data.result.suggestions[0]]+" دارید؟";
-                            answerSymptomString = symptoms_name[response.data.result.suggestions[0]];
+                            btn.innerHTML = "آیا "+ response1+" دارید؟";
+                            answerSymptomString = response1;
                             document.getElementById("divid2").appendChild(btn);
+                                
+                });
+                            });
                         }
                 }).catch((error) => {
                     console.log(error);
                 }).then(() => {
-                    console.log('fuckedup');
-                });
+                    
+                       
+        });
         }
-        function getConceptFromString(string)
+        async function getConceptFromString(string)
         {
-            axios.get('https://www.medallin.ir/api/concept/string/'+string, { headers: {
-                Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f' } })
+            let searchedID;
+                await axios.get('https://www.medallin.ir/api/concept/string/'+string, { headers: {
+                Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f',  'Accept-Language': 'fa'} })
                     .then((response) => {
                         console.log(response.data);
-                        answerSymptomString = response.data.concept_id;
-                        console.log(answerSymptomString);
-                        return answerSymptomString;
+                        searchedID = response.data.concept_id;
+                        console.log(searchedID);
+                        return searchedID;
+                }).catch((error) => {
+                    console.log(error);
+                }).then(() => {
+                    
+                    console.log(searchedID);
+                    console.log('fuckedup');
+                    return searchedID;
+
+                });
+        return searchedID;
+
+        }
+        async function getStringFromConceptDisease(concept_id)
+        {
+            let response;
+            await axios.get('https://www.medallin.ir/api/info/disease/'+concept_id, { headers: {
+                Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f',  'Accept-Language': 'fa' } })
+                    .then((response) => {
+                        console.log(response.data);
+                        answer = response.data.label;
+                        response = answer;
+                        console.log(answer);
+                        return response;
+
                 }).catch((error) => {
                     console.log(error);
                 }).then(() => {
                     console.log('fuckedup');
+                     return response;
                 });
+                return response;
+        }
+         async function getStringFromConceptSymptom(concept_id)
+        {
+             let searchedID;
+                await axios.get('https://www.medallin.ir/api/info/symptom/'+concept_id, { headers: {
+                Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f',  'Accept-Language': 'fa' } })
+                    .then((response) => {
+                        console.log(response.data);
+                        searchedID = response.data.label;
+                        console.log(searchedID);
+                        return searchedID;
+                }).catch((error) => {
+                    console.log(error);
+                }).then(() => {
+                    
+                    console.log(searchedID);
+                    console.log('fuckedup');
+                    return searchedID;
+
+                });
+        return searchedID;
         }
         function getKeyByValue(object, value) {
             return Object.keys(object).find(key => object[key] === value);
