@@ -6,7 +6,7 @@
   flex:left;
   height: 100%;
   bottom: 0pt;
-  font-size: 5vh;
+  font-size: 3vh;
   background-color: rgb(255, 255, 255);
   border-color: rgb(255, 255, 255);
   color: rgb(31, 31, 31);
@@ -27,7 +27,7 @@
   margin-right: 20px;
   color: rgb(192, 192, 192);
   float: left;
-  font-size: 4vh;
+  font-size: 3vh;
 
   background-color: #146f79;
   position: relative;
@@ -52,7 +52,7 @@
   border-radius: 6px;
   margin-right: 40px;
   margin-left: 20px;
-  font-size: 4vh;
+  font-size: 3vh;
   color:black;
   background-color:#9fb7b9;
   position: relative;
@@ -77,7 +77,7 @@
   height: 100%;
   bottom: 0pt;
   float: right;
-  font-size:  5vh;
+  font-size: 3vh;
   display: table-cell;
   width: 100px;
 }
@@ -164,5 +164,5 @@ body {
   padding-right: 10px;
   background-color:  #f7f7f7;
   color: #141414;
-  font-size:  4vh;
+  font-size:  3vh;
 }
