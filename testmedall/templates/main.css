@@ -1,0 +1,64 @@
+.textbox
+{
+  position: relative;
+  left: 0pt;
+  right: 0pt;
+  height: 100%;
+  width: 70%;
+  bottom: 0pt;
+  float: left;
+  font-size: 5vh;
+  background-color: black;
+  border-color: black;
+  color: white;
+}
+.but
+{
+  background-color:rgb(14, 160, 80);
+  position: relative;
+  left: 0pt;
+  right: 0pt;
+  height: 100%;
+  width: 29%;
+  bottom: 0pt;
+  float: right;
+  font-size:  5vh;
+}
+.iii
+{
+  position: fixed;
+  width: 100%;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+body {
+  position: relative;
+  background-color:black;
+  color: white;
+}
+.div2
+{
+  position: relative;
+  height:100%;
+  width: 100%;
+  margin-bottom: 20vh;
+}
+.div1
+{
+  position:relative;
+  background-color: crimson;
+  width: 100%;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  font-size: 3vh;
+}
+.helper
+{
+  text-align: right;
+  padding-right: 10px;
+  background-color: yellow;
+  color: #e69f1c;
+  font-size:  4vh;
+}
