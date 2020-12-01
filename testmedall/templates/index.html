@@ -7,7 +7,10 @@
 <title>مدالین</title>
 <link rel = "stylesheet"
 type = "text/css"
-href = "{% static 'css/main.css' %}"/>
+href = "../static/css/main.css"/>
+
+<!-- href = "{% static 'css/main.css' %}" -->
+
 <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 </head>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -31,21 +34,9 @@ href = "{% static 'css/main.css' %}"/>
         var answerSymptomString;
         var mySymptoms= new Object();
         function getInputValue(){
-           if(con ==1)
-            {            
-			    getMessage();
-                setHelper("در حال به روز رسانی...صبر کنید.");
-                var btn = document.createElement("DIV");
-                btn.style.fontSize="5vh";
-                document.getElementById("butid").innerHTML="ارسال";
-                btn.innerHTML = "سلام، چند سالتونه؟";
-                setHelper("سن خود را به عدد وارد کنید.")
-                document.getElementById("divid2").appendChild(btn);
-                con++;
-            }
-            else if(con ==1)
+            if(con ==1)
             {
-
+			    getMessage();
                 age = document.getElementById("myInput").value;
                 console.log(age);
                 var btn = document.createElement("DIV");
@@ -76,8 +67,8 @@ href = "{% static 'css/main.css' %}"/>
                 con++;
             }
             else if(con ==3)
-            {            getMessage();
-
+            {           
+                 getMessage();
                 var symptom = document.getElementById("myInput").value;
                 getPredictFromSymptom(symptom,1);
                 con++;
@@ -144,7 +135,8 @@ href = "{% static 'css/main.css' %}"/>
             }})
                 .then((response) => {
                     console.log(response.data);
-                   // getPredictFromId(response.data.id)
+                    getPredictFromId(response.data.id)
+                    
                 }).catch((error) => {
                     console.log(error);
                 }).then(() => {
