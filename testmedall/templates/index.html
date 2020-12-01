@@ -8,6 +8,7 @@
 <link rel = "stylesheet"
 type = "text/css"
 href = "{% static 'css/style.css' %}"/>
+<!-- href = "{% static 'css/style.css' %}" -->
 <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 </head>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -19,8 +20,10 @@ href = "{% static 'css/style.css' %}"/>
                </div></div></div>
         <div class="iii">
         <div class="helper" id="helperid">راهنما : سن خود را وارد کنید.</div>
+        <div class="foot">
         <input type="text" placeholder="اینجا بنویسید..." id="myInput" class="textbox">
         <button type="button" onclick="getInputValue();" class="but" id="butid">ارسال</button>
+    </div>
     </div>
     <script>
         con = 1;

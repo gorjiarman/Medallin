@@ -1,19 +1,22 @@
 .textbox
 {
   position: relative;
-  left: 0pt;
-  right: 0pt;
+  display: table-cell;
+  width: calc(100% - 100px);
+
   height: 100%;
-  width: 70%;
   bottom: 0pt;
-  float: left;
   font-size: 5vh;
   background-color: rgb(255, 255, 255);
   border-color: rgb(255, 255, 255);
   color: rgb(31, 31, 31);
 }
+.foot
+{
+  width: 100%;
+}
 
-.BmBox {
+.Bmbox {
   display: inline-block;
   align-self: start;
   direction: rtl;
@@ -29,7 +32,7 @@
   position: relative;
 }
 
-.BmBox:after {
+.Bmbox:after {
   content: "";
   position: absolute;
   margin-top: -6px;
@@ -42,7 +45,7 @@
   left: -15px;
 
 }
-.UmBox {
+.Umbox {
   display:inline-block;
   padding:5px 6px 8px 6px;
   border-radius: 6px;
@@ -54,7 +57,7 @@
   position: relative;
 }
 
-.UmBox:before {
+.Umbox:before {
   content: "";
   position:absolute;
   margin-top:-6px;
@@ -70,13 +73,12 @@
 {
   background-color:rgb(38, 57, 58);
   position: relative;
-  left: 0pt;
-  right: 0pt;
   height: 100%;
-  width: 29%;
   bottom: 0pt;
   float: right;
   font-size:  5vh;
+  display: table-cell;
+  width: 100px;
 }
 .but2
 {
