@@ -13,7 +13,7 @@
   color: rgb(31, 31, 31);
 }
 
-.BmBox {
+.Bmbox {
   display: inline-block;
   align-self: start;
   direction: rtl;
@@ -29,7 +29,7 @@
   position: relative;
 }
 
-.BmBox:after {
+.Bmbox:after {
   content: "";
   position: absolute;
   margin-top: -6px;
@@ -42,7 +42,7 @@
   left: -15px;
 
 }
-.UmBox {
+.Umbox {
   display:inline-block;
   padding:5px 6px 8px 6px;
   border-radius: 6px;
@@ -54,7 +54,7 @@
   position: relative;
 }
 
-.UmBox:before {
+.Umbox:before {
   content: "";
   position:absolute;
   margin-top:-6px;
