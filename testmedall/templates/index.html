@@ -2,24 +2,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta charset="utf-8">
 <title>Get Text Input Field Value in JavaScript</title>
 <link rel = "stylesheet"
 type = "text/css"
-href = "{% static 'css/main.css' %}" />
+href = "{% static 'css/main.css' %}"/> 
+
 </head>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <body>
-    <div class="div1" >این یک نسخه ی آزمایشی از مدالین است<a href=mailto:gorjiarman@gmail.com>gorjiarman@gmail.com</a></div>
-    <div class="div2" id="divid2">
-    </div>
-    <div class="iii">
-    <div class="helper" id="helperid">راهنما : شروع کنید</div>
-    <input type="text" placeholder="اینجا بنویسید..." id="myInput" class="textbox">
-    <button type="button" onclick="getInputValue();" class="but" id="butid">شروع</button>
+    <div class="mainContainer">
+               <div class="div2" id="divid2"> <div class="Bmbox">
+            این یک نسخه ی آزمایشی از مدالین است . مدالین یک سامانه ی خودارزیابی پزشکی آزاد است. میتوانید کد مدالین را بر روی گیت هاب به این آدرس پیدا کنید. <a href="https://github.com/Armanu/Medallin">Medallin</a><br>راه ارتباطی با من : <a href=mailto:gorjiarman@gmail.com>gorjiarman@gmail.com</a>
+            <br>برای شروع سن خود را وارد کنید.
+               </div></div>
+        <div class="iii">
+        <div class="helper" id="helperid">راهنما : سن خود را وارد کنید.</div>
+        <input type="text" placeholder="اینجا بنویسید..." id="myInput" class="textbox">
+        <button type="button" onclick="getInputValue();" class="but" id="butid">ارسال</button>
     </div>
     <script>
-        con = 0;
+        con = 1;
         var age ="";
         var gender="";
         var diseases;
@@ -27,48 +31,49 @@ href = "{% static 'css/main.css' %}" />
         var answerSymptomString;
         var mySymptoms= new Object();
         function getInputValue(){
-            getMessage();
-            if(con ==0)
-            {
-                setHelper("در حال به روز رسانی...صبر کنید.");
-                var btn = document.createElement("DIV");
-                btn.style.fontSize="5vh";
-                document.getElementById("butid").innerHTML="ارسال";
-                btn.innerHTML = "سلام، چند سالتونه؟";
-                setHelper("سن خود را به عدد وارد کنید.")
-                document.getElementById("divid2").appendChild(btn);
-                con++;
-            }
-            else if(con ==1)
-            {
+            
+            if(con ==1)
+            {            getMessage();
+
                 age = document.getElementById("myInput").value;
                 console.log(age);
                 var btn = document.createElement("DIV");
+                var cbtn = document.createElement("DIV");
+                cbtn.setAttribute("class","but2");
+                btn.setAttribute("class","Bmbox");
                 btn.style.fontSize="5vh";
                 btn.innerHTML = "مرد یا زن ؟";
                 setHelper("جنسیت خود را وارد کنید")
-                document.getElementById("divid2").appendChild(btn);
+                cbtn.appendChild(btn);
+                document.getElementById("divid2").appendChild(cbtn);
                 con++;
             }
             else if(con ==2)
-            {
+            {            getMessage();
+
                 gender = document.getElementById("myInput").value.replace("مرد","male").replace("زن","female");
                 console.log(gender);
                 var btn = document.createElement("DIV");
+                var cbtn = document.createElement("DIV");
+                cbtn.setAttribute("class","but2");
+                btn.setAttribute("class","Bmbox");
                 btn.style.fontSize="5vh";
                 btn.innerHTML = "مشکلتون چیه ؟";
                 setHelper("مانند؛ تب ، سردرد، سرفه")
-                document.getElementById("divid2").appendChild(btn);
+                cbtn.appendChild(btn);
+                document.getElementById("divid2").appendChild(cbtn);
                 con++;
             }
             else if(con ==3)
-            {
+            {            getMessage();
+
                 var symptom = document.getElementById("myInput").value;
                 getPredictFromSymptom(symptom,1);
                 con++;
             }
             else if(con ==4)
-            {
+            {            getMessage();
+
                 console.log('here we are');
                 var answer = document.getElementById("myInput").value;
                 if(answer =="y")
@@ -87,8 +92,12 @@ href = "{% static 'css/main.css' %}" />
                 else
                 {
                     var btn = document.createElement("DIV");
+                    var cbtn = document.createElement("DIV");
+                    cbtn.setAttribute("class","but2");
+                    btn.setAttribute("class","Bmbox");
                     btn.style.fontSize="5vh";
                     btn.innerHTML = 'چی؟';
+                    cbtn.appendChild(btn);
                     document.getElementById("divid2").appendChild(btn);
                 }
 
@@ -146,52 +155,56 @@ href = "{% static 'css/main.css' %}" />
                         else
                         {
                             console.log(response.data);
-                            var btn = document.createElement("DIV");
-                            btn.style.fontSize="5vh";
-                            btn.innerHTML = 'بیماری ها :';
-                            document.getElementById("divid2").appendChild(btn);
+                            answers="";
                             const forLoop = async _ => {
                             console.log('Start')
 
                             for (let index = 0; index < 10; index++) {
                            
+                                answer="";
                                 console.log(response.data.result.predictions[index][0]);
-                                axios.get('https://www.medallin.ir/api/info/disease/'+response.data.result.predictions[index][0], { headers: {
+                                await axios.get('https://www.medallin.ir/api/info/disease/'+response.data.result.predictions[index][0], { headers: {
                                    Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f' ,
                                       'Accept-Language': 'fa'
                                 } })
                                 .then((response) => {
-                                   console.log(response.data);
-                                   answer = response.data.label;
-                                  console.log(answer);
-                                   var btn = document.createElement("DIV");
-                                btn.style.fontSize="5vh";
-                                btn.innerHTML = answer;
-                                btn.style.color="red";
-                                document.getElementById("divid2").appendChild(btn);
+                                   
+                                    answer = response.data.label;
+                                   answers+=answer+"<br>";
+                                   console.log(answers);
 
                                 }).catch((error) => {
                                     console.log(error);
                                 }).then(() => {
                                 });                                
-                                
                             }
-
-                            console.log('End')
+                          
                             }
                             forLoop().then(()=>{
+                                var btn = document.createElement("DIV");
+                            var cbtn = document.createElement("DIV");
+                            cbtn.setAttribute("class","but2");
+                            btn.setAttribute("class","Bmbox");
+                            btn.style.fontSize="5vh";
+                            btn.innerHTML = 'بیماری ها :'+"<br>"+answers;
+                            cbtn.appendChild(btn);
+                            document.getElementById("divid2").appendChild(cbtn);
+
                             getStringFromConceptSymptom(response.data.result.suggestions[0]).then((response1) => {
                                 
                             console.log('fuckedup');
-                            window.scrollTo(0,document.getElementById("divid2").scrollHeight);
                             setHelper("y = آره , n = نه , u = نمیدونم");
                             var btn = document.createElement("DIV");
+                            var cbtn = document.createElement("DIV");
+                            cbtn.setAttribute("class","but2");
+                            btn.setAttribute("class","Bmbox");
                             btn.style.fontSize="5vh";
-                            btn.style.backgroundColor="gray"
                             btn.innerHTML = "آیا "+ response1+" دارید؟";
                             answerSymptomString = response1;
-                            document.getElementById("divid2").appendChild(btn);
-                                
+                            cbtn.appendChild(btn);
+                            document.getElementById("divid2").appendChild(cbtn);
+                            window.scrollTo(0,document.getElementById("divid2").scrollHeight+300);
+
                 });
                             });
                         }
@@ -276,15 +289,19 @@ href = "{% static 'css/main.css' %}" />
         {
             var inputString = document.getElementById("myInput").value;
             var btn = document.createElement("DIV");
+            var cbtn = document.createElement("DIV");
+            cbtn.setAttribute("class","but3");
+
+            btn.setAttribute("class","Umbox");
             btn.style.textAlign ="right"
             btn.style.fontSize="5vh";
-            btn.style.background ="#2268c4"
             btn.innerHTML = inputString;
-            document.getElementById("divid2").appendChild(btn);
+            cbtn.appendChild(btn);
+            document.getElementById("divid2").appendChild(cbtn);
             
         }
 
     </script>
- 
+ </div>
 </body>
 </html>

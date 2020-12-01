@@ -8,9 +8,59 @@
   bottom: 0pt;
   float: left;
   font-size: 5vh;
-  background-color: black;
-  border-color: black;
-  color: white;
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(255, 255, 255);
+  color: rgb(31, 31, 31);
+}
+
+.UmBox {
+  display: inline-block;
+  align-self: start;
+  direction: rtl;
+  padding: 5px 6px 8px 6px;
+  border-radius: 6px;
+  margin-left: 40px;
+  margin-right: 20px;
+  color: black;
+  float: left;
+  background-color: #146f79;
+  position: relative;
+}
+
+.UmBox:after {
+  content: "";
+  position: absolute;
+  margin-top: -6px;
+  margin-right: -5px;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #146f79;
+  transform: rotate(45deg);
+  top: 10px;
+}
+.BmBox {
+  display:inline-block;
+  padding:5px 6px 8px 6px;
+  border-radius: 6px;
+  margin-right: 40px;
+  margin-left: 20px;
+  font-size: 4vh;
+  color:black;
+  background-color:#9fb7b9;
+  position: relative;
+}
+
+.BmBox:before {
+  content: "";
+  position:absolute;
+  margin-top:-6px;
+  margin-left:-5px;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #9fb7b9;
+  transform:rotate(-45deg);
+  right: -15px; 
+  top: 10px;
 }
 .but
 {
@@ -24,30 +74,73 @@
   float: right;
   font-size:  5vh;
 }
+.but2
+{
+  display: table;
+  width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+.but3
+{
+  display: table;
+  margin-bottom: 10px;
+  margin-top: 10px;
+
+  width: 100%;
+}
 .iii
 {
   position: fixed;
-  width: 100%;
-  left: 0px;
-  right: 0px;
+  width: inherit;
+  height: fit-content;
   bottom: 0px;
 }
 body {
-  position: relative;
-  background-color:black;
-  color: white;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color:rgb(255, 255, 255);
+  align-content: center;
+  direction: rtl;
+  color: rgb(26, 26, 26);
+  margin: 0px;
 }
+@media only screen and (min-width: 768px) {
+.mainContainer
+{
+  position: absolute;
+  width: 40%;
+  align-content: center;
+  left: 30%;
+  right: 30%;
+  height: -webkit-fill-available;
+  background-color: #f7f7f7;
+}
+}
+@media only screen and (max-width: 768px) {
+.mainContainer
+{
+  position: relative;
+  width:100%;
+  height: -webkit-fill-available;
+  background-color: #1ce6ba;
+}
+}
+
 .div2
 {
   position: relative;
-  height:100%;
   width: 100%;
-  margin-bottom: 20vh;
+  height: fit-content;
+  padding-bottom: 150px;
+  background-color: #f7f7f7;
 }
 .div1
 {
   position:relative;
-  background-color: crimson;
+  background-color: rgb(188, 232, 245);
   width: 100%;
   left: 0px;
   right: 0px;
@@ -56,9 +149,10 @@ body {
 }
 .helper
 {
+  position:relative;
   text-align: right;
   padding-right: 10px;
-  background-color: yellow;
-  color: #e69f1c;
+  background-color:  #f7f7f7;
+  color: #141414;
   font-size:  4vh;
 }
