@@ -7,13 +7,7 @@
 <title>مدالین</title>
 <link rel = "stylesheet"
 type = "text/css"
-<<<<<<< Updated upstream
 href = "{% static 'css/main.css' %}"/>
-<!-- href = "../static/css/main.css" -->
-
-=======
-href = "main.css" />
->>>>>>> Stashed changes
 </head>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <body>
@@ -36,15 +30,9 @@ href = "main.css" />
         var answerSymptomString;
         var mySymptoms= new Object();
         function getInputValue(){
-<<<<<<< Updated upstream
-            
            if(con ==1)
-            {            getMessage();
-
-=======
-            getMessage();
-            if(con ==0)
-            {
+            {            
+			    getMessage();
                 setHelper("در حال به روز رسانی...صبر کنید.");
                 var btn = document.createElement("DIV");
                 btn.style.fontSize="5vh";
@@ -52,34 +40,11 @@ href = "main.css" />
                 btn.innerHTML = "سلام، چند سالتونه؟";
                 setHelper("سن خود را به عدد وارد کنید.")
                 document.getElementById("divid2").appendChild(btn);
-// <!--                axios.defaults.headers.post['Content-Type'] ='application/json';-->
-// <!--                axios.get('http://185.97.117.155/api/list/symptoms/', { headers: {-->
-// <!--                'Accept-Language': 'fa',-->
-// <!--                Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f' } })-->
-// <!--                    .then((response) => {-->
-// <!--                        symptoms_name = response.data;-->
-// <!--                        axios.get('http://185.97.117.155/api/list/diseases/', { headers: {-->
-// <!--                        'Accept-Language': 'fa',-->
-// <!--                         Authorization: 'Bearer 5775e6158ce345feb2b4988b4c7d940f' } })-->
-// <!--                            .then((response) => {-->
-// <!--                                diseases = response.data;-->
-// <!--                            }).catch((error) => {-->
-// <!--                                console.log(error);-->
-
-// <!--                }).then(() => {-->
-// <!--                    console.log('fuckedup');-->
-// <!--                });-->
-// <!--                   -->
-// <!--                }).catch((error) => {-->
-// <!--                    console.log(error);-->
-// <!--                }).then(() => {-->
-// <!--                    console.log('fuckedup');-->
-// <!--                });-->
                 con++;
             }
             else if(con ==1)
             {
->>>>>>> Stashed changes
+
                 age = document.getElementById("myInput").value;
                 console.log(age);
                 var btn = document.createElement("DIV");
@@ -114,23 +79,13 @@ href = "main.css" />
 
                 var symptom = document.getElementById("myInput").value;
                 getPredictFromSymptom(symptom,1);
-<<<<<<< Updated upstream
-=======
-// <!--                searchedID = getConceptFromString(symptom);-->
-// <!--                console.log(searchedID);-->
->>>>>>> Stashed changes
                 con++;
             }
             else if(con ==4)
-            {            getMessage();
-
+            {           
+			getMessage();
                 console.log('here we are');
                 var answer = document.getElementById("myInput").value;
-<<<<<<< Updated upstream
-=======
-// <!--                searchedID = getConceptFromString(answer);-->
-// <!--                console.log(searchedID);-->
->>>>>>> Stashed changes
                 if(answer =="y")
                 {
 
@@ -165,16 +120,11 @@ href = "main.css" />
         {
             getConceptFromString(symptomString).then((response) => {
             var symptomsString='{';
-<<<<<<< Updated upstream
             mySymptoms['"'+response+'"'] = symptomValue;
             console.log( response);
-=======
             searchedID = getConceptFromString(symptomString);
-
-// <!--            translatedsymptom = getKeyByValue(symptoms_name,symptomString);-->
             mySymptoms['"'+searchedID+'"'] = symptomValue;
             console.log(searchedID);
->>>>>>> Stashed changes
             var bodyFormData = new FormData();
             for(mySymptom in mySymptoms)
             {
