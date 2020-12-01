@@ -13,7 +13,7 @@
   color: rgb(31, 31, 31);
 }
 
-.UmBox {
+.BmBox {
   display: inline-block;
   align-self: start;
   direction: rtl;
@@ -21,13 +21,15 @@
   border-radius: 6px;
   margin-left: 40px;
   margin-right: 20px;
-  color: black;
+  color: rgb(192, 192, 192);
   float: left;
+  font-size: 4vh;
+
   background-color: #146f79;
   position: relative;
 }
 
-.UmBox:after {
+.BmBox:after {
   content: "";
   position: absolute;
   margin-top: -6px;
@@ -37,8 +39,10 @@
   border-bottom: 12px solid #146f79;
   transform: rotate(45deg);
   top: 10px;
+  left: -15px;
+
 }
-.BmBox {
+.UmBox {
   display:inline-block;
   padding:5px 6px 8px 6px;
   border-radius: 6px;
@@ -50,7 +54,7 @@
   position: relative;
 }
 
-.BmBox:before {
+.UmBox:before {
   content: "";
   position:absolute;
   margin-top:-6px;
@@ -107,10 +111,11 @@ body {
   color: rgb(26, 26, 26);
   margin: 0px;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 900px) {
 .mainContainer
 {
   position: absolute;
+  padding-top: 20px;
   width: 40%;
   align-content: center;
   left: 30%;
@@ -119,13 +124,15 @@ body {
   background-color: #f7f7f7;
 }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
 .mainContainer
 {
+  padding-top: 20px;
+
   position: relative;
   width:100%;
   height: -webkit-fill-available;
-  background-color: #1ce6ba;
+  background-color: #f7f7f7;
 }
 }
 

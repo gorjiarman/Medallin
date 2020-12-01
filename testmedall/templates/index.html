@@ -4,19 +4,20 @@
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta charset="utf-8">
-<title>Get Text Input Field Value in JavaScript</title>
+<title>مدالین</title>
 <link rel = "stylesheet"
 type = "text/css"
-href = "{% static 'css/main.css' %}"/> 
+href = "{% static 'css/main.css' %}"/>
+<!-- href = "../static/css/main.css" -->
 
 </head>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <body>
     <div class="mainContainer">
-               <div class="div2" id="divid2"> <div class="Bmbox">
+               <div class="div2" id="divid2"><div class="but3"> <div class="Bmbox">
             این یک نسخه ی آزمایشی از مدالین است . مدالین یک سامانه ی خودارزیابی پزشکی آزاد است. میتوانید کد مدالین را بر روی گیت هاب به این آدرس پیدا کنید. <a href="https://github.com/Armanu/Medallin">Medallin</a><br>راه ارتباطی با من : <a href=mailto:gorjiarman@gmail.com>gorjiarman@gmail.com</a>
             <br>برای شروع سن خود را وارد کنید.
-               </div></div>
+               </div></div></div>
         <div class="iii">
         <div class="helper" id="helperid">راهنما : سن خود را وارد کنید.</div>
         <input type="text" placeholder="اینجا بنویسید..." id="myInput" class="textbox">
@@ -32,7 +33,7 @@ href = "{% static 'css/main.css' %}"/>
         var mySymptoms= new Object();
         function getInputValue(){
             
-            if(con ==1)
+           if(con ==1)
             {            getMessage();
 
                 age = document.getElementById("myInput").value;
@@ -298,7 +299,8 @@ href = "{% static 'css/main.css' %}"/>
             btn.innerHTML = inputString;
             cbtn.appendChild(btn);
             document.getElementById("divid2").appendChild(cbtn);
-            
+            window.scrollTo(0,document.getElementById("divid2").scrollHeight+300);
+
         }
 
     </script>
