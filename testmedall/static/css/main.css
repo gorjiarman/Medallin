@@ -3,7 +3,7 @@
   position: relative;
   display: table-cell;
   width: calc(100% - 100px);
-
+  flex:left;
   height: 100%;
   bottom: 0pt;
   font-size: 5vh;
@@ -14,6 +14,7 @@
 .foot
 {
   width: 100%;
+  display:flex;
 }
 
 .Bmbox {
